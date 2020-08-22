@@ -30,8 +30,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //@Autowired
-    private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+    @Autowired
+    private UserMapper userMapper;
 
 
     @PostMapping

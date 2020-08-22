@@ -28,6 +28,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+
     public User create(User user) throws TimeTrackerException {
         if ( userRepo.findByEmail(user.getEmail()).isPresent() )
             throw new TimeTrackerException("User e-mail already exists");

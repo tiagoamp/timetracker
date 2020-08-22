@@ -17,6 +17,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,8 +31,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //@Autowired
-    private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+    @Autowired
+    private UserMapper userMapper;
 
 
     @PostMapping
@@ -47,8 +48,16 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") String id, @RequestBody UserRequestDTO userReqDTO) {
-        return ResponseEntity.ok(new UserResponseDTO());
+    public ResponseEntity<?> updateUser(@NotNull @PathVariable("id") String id, @Valid @RequestBody UserRequestDTO userReqDTO) {
+        User user = userMapper.toModel(userReqDTO);
+        user.setId(id);
+        try {
+            user = userService.update(user);
+            UserResponseDTO userDTO = userMapper.toResponseDTO(user);
+            return ResponseEntity.ok(userDTO);
+        } catch (TimeTrackerException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("{id}")

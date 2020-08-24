@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("user")
@@ -40,7 +43,7 @@ public class UserController {
         var user = userMapper.toModel(userReqDTO);
         try {
             user = userService.create(user);
-            UserResponseDTO userDTO = userMapper.toResponseDTO(user);
+            var userDTO = userMapper.toResponseDTO(user);
             return ResponseEntity.created(URI.create(userDTO.getId())).body(userDTO);
         } catch (TimeTrackerException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -49,11 +52,11 @@ public class UserController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> updateUser(@NotNull @PathVariable("id") String id, @Valid @RequestBody UserRequestDTO userReqDTO) {
-        User user = userMapper.toModel(userReqDTO);
+        var user = userMapper.toModel(userReqDTO);
         user.setId(id);
         try {
             user = userService.update(user);
-            UserResponseDTO userDTO = userMapper.toResponseDTO(user);
+            var userDTO = userMapper.toResponseDTO(user);
             return ResponseEntity.ok(userDTO);
         } catch (TimeTrackerException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -61,18 +64,30 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> removeUser(@PathVariable("id") String id) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> removeUser(@NotNull @PathVariable("id") String id) {
+        try {
+            userService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (TimeTrackerException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
-        return ResponseEntity.ok(new ArrayList<>());
+        var users = userService.findUsers();
+        var dtos = users.stream().map(userMapper::toResponseDTO).collect(toList());
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(new UserResponseDTO());
+    public ResponseEntity<?> getUserById(@NotNull @PathVariable("id") String id) {
+        try {
+            var user = userService.findUserById(id);
+            return ResponseEntity.ok(userMapper.toResponseDTO(user));
+        } catch (TimeTrackerException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 

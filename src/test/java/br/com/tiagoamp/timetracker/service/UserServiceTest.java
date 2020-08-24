@@ -85,7 +85,17 @@ class UserServiceTest {
     }
 
     @Test
-    void delete() {
+    @DisplayName("When user id does not exist should throw exception")
+    void delete_shouldThrowError() {
+        Mockito.when(userRepo.findById(Mockito.anyString())).thenReturn(Optional.empty());
+        assertThrows(TimeTrackerException.class, () -> service.delete("test-id"));
+    }
+
+    @Test
+    @DisplayName("When user id exists should delete user")
+    void delete_shouldDeleteUser() throws TimeTrackerException {
+        Mockito.when(userRepo.findById(Mockito.anyString())).thenReturn(Optional.of(new UserEntity()));
+        service.delete("test-id");
     }
 
     @Test

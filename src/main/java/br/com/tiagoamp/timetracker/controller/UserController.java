@@ -40,7 +40,7 @@ public class UserController {
         var user = userMapper.toModel(userReqDTO);
         try {
             user = userService.create(user);
-            UserResponseDTO userDTO = userMapper.toResponseDTO(user);
+            var userDTO = userMapper.toResponseDTO(user);
             return ResponseEntity.created(URI.create(userDTO.getId())).body(userDTO);
         } catch (TimeTrackerException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -49,11 +49,11 @@ public class UserController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> updateUser(@NotNull @PathVariable("id") String id, @Valid @RequestBody UserRequestDTO userReqDTO) {
-        User user = userMapper.toModel(userReqDTO);
+        var user = userMapper.toModel(userReqDTO);
         user.setId(id);
         try {
             user = userService.update(user);
-            UserResponseDTO userDTO = userMapper.toResponseDTO(user);
+            var userDTO = userMapper.toResponseDTO(user);
             return ResponseEntity.ok(userDTO);
         } catch (TimeTrackerException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -62,7 +62,12 @@ public class UserController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> removeUser(@PathVariable("id") String id) {
-        return ResponseEntity.ok().build();
+        try {
+            userService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (TimeTrackerException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping

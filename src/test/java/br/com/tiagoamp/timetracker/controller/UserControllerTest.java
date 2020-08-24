@@ -3,6 +3,7 @@ package br.com.tiagoamp.timetracker.controller;
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
+import br.com.tiagoamp.timetracker.model.TimeTrackerException;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -98,6 +99,25 @@ class UserControllerTest {
                 .content(userJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+    }
+
+    @Test
+    @DisplayName("When Delete request with non-existing id Should result validation messages")
+    public void whenDelRequestToUsers_messagesResponse() throws Exception {
+        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).delete(Mockito.anyString());
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/user/{id}", "id-test")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("When Delete request of existing id Should delete user")
+    public void whenDelRequestToUsers_correctResponse() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/user/{id}", "id-test")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
 }

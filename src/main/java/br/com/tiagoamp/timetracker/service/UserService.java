@@ -33,9 +33,8 @@ public class UserService {
         if ( userRepo.findByEmail(user.getEmail()).isPresent() )
             throw new TimeTrackerException("User e-mail already exists");
         user.setId(UUID.randomUUID().toString());
-        UserEntity entity = userMapper.toEntity(user);
-        UserEntity saved = userRepo.save(entity);
-        return userMapper.toModel(saved);
+        UserEntity entity = userRepo.save(userMapper.toEntity(user));
+        return userMapper.toModel(entity);
     }
 
     public User update(User user) throws TimeTrackerException {

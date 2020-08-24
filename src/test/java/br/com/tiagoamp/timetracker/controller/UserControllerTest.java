@@ -6,6 +6,7 @@ import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
 import br.com.tiagoamp.timetracker.model.TimeTrackerException;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.service.UserService;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +21,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static br.com.tiagoamp.timetracker.util.JsonUtil.toJson;
 
@@ -102,7 +106,7 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("When Delete request with non-existing id Should result validation messages")
+    @DisplayName("When Delete request with non-existing id Should result error message")
     public void whenDelRequestToUsers_messagesResponse() throws Exception {
         Mockito.doThrow(new TimeTrackerException("Message")).when(userService).delete(Mockito.anyString());
         mockMvc.perform(MockMvcRequestBuilders
@@ -119,5 +123,52 @@ class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
+
+    @Test
+    @DisplayName("When Get All request and no Users registered Should result empty list")
+    public void whenGetAllRequestToUsers_emptyResponse() throws Exception {
+        Mockito.when(userService.findUsers()).thenReturn(new ArrayList<>());
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.empty()));
+    }
+
+    @Test
+    @DisplayName("When Get All request Should return registered users list")
+    public void whenGetAllRequestToUsers_correctResponse() throws Exception {
+        var registeredUsers = Arrays.asList(new User(), new User());
+        Mockito.when(userService.findUsers()).thenReturn(registeredUsers);
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(registeredUsers.size())));
+    }
+
+    @Test
+    @DisplayName("When Get by id request with non-existing user Should return error message")
+    public void whenGetByIdRequestToUsers_messagesResponse() throws Exception {
+        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).findUserById(Mockito.anyString());
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{id}", "id-test")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("When Get by id request of existing user Should result user")
+    public void whenGetByIdRequestToUsers_correctResponse() throws Exception {
+        Mockito.when(userService.findUserById(Mockito.anyString())).thenReturn(new User("id", "email@email.com", "name", "pass"));
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{id}", "id-test")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+    }
+
 
 }

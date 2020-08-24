@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -99,12 +101,44 @@ class UserServiceTest {
     }
 
     @Test
-    void findUsers() {
+    @DisplayName("When does not exist users should return empty list")
+    void findUsers_shouldReturnEmptyList() {
+        Mockito.when(userRepo.findAll()).thenReturn(new ArrayList<>());
+        var result = service.findUsers();
+        assertNotNull(result);
+        assertEquals(0, result.size());
     }
 
     @Test
-    void findUserById() {
+    @DisplayName("When users exist should return users list")
+    void findUsers_shouldReturnList() {
+        var userEntities = Arrays.asList(new UserEntity(), new UserEntity());
+        Mockito.when(userRepo.findAll()).thenReturn(userEntities);
+        var result = service.findUsers();
+        assertNotNull(result);
+        assertEquals(2, result.size());
     }
+
+    @Test
+    @DisplayName("When user id does not exist should throw exception")
+    void findUserById_shouldThrowError() throws TimeTrackerException {
+        Mockito.when(userRepo.findById(Mockito.anyString())).thenReturn(Optional.empty());
+        assertThrows(TimeTrackerException.class, () -> service.findUserById("test-id"));
+    }
+
+    @Test
+    @DisplayName("When user id exists should return user")
+    void findUserById_shouldReturnUser() throws TimeTrackerException {
+        // given
+        var user = new User("test-id","existing@email.com", "Name", "pass");
+        var userEntity = userMapper.toEntity(user);
+        Mockito.when(userRepo.findById(Mockito.anyString())).thenReturn(Optional.of(userEntity));
+        // when
+        var result = service.findUserById(user.getId());
+        // then
+        assertNotNull(result.getId());
+    }
+
 
     @Test
     void createCategory() {

@@ -43,7 +43,7 @@ class UserServiceTest {
     @Test
     @DisplayName("When existing e-mail should throw exception")
     void create_shouldThrowError() {
-        User newUser = new User("existing@email.com", "Name", "");
+        var newUser = new User("existing@email.com", "Name", "");
         Mockito.when(userRepo.findByEmail(newUser.getEmail())).thenReturn(Optional.of(new UserEntity()));
         assertThrows(TimeTrackerException.class, () -> service.create(newUser));
     }
@@ -52,9 +52,8 @@ class UserServiceTest {
     @DisplayName("When new e-mail should create user")
     void create_shouldCreateUser() throws TimeTrackerException {
         // given
-        User newUser = new User("new@email.com", "Name", "");
-        UserEntity userEntity = userMapper.toEntity(newUser);
-        userEntity.setId("test-id");
+        var newUser = new User("test-id", "new@email.com", "Name", "");
+        var userEntity = userMapper.toEntity(newUser);
         Mockito.when(userRepo.findByEmail(newUser.getEmail())).thenReturn(Optional.empty());
         Mockito.when(userRepo.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
         // when
@@ -65,7 +64,24 @@ class UserServiceTest {
 
 
     @Test
-    void update() {
+    @DisplayName("When user does not exist should throw exception")
+    void update_shouldThrowError() {
+        var newUser = new User("test-id","existing@email.com", "Name", "pass");
+        Mockito.when(userRepo.findById(Mockito.anyString())).thenReturn(Optional.empty());
+        assertThrows(TimeTrackerException.class, () -> service.update(newUser));
+    }
+
+    @Test
+    @DisplayName("When user exists should update info")
+    void update_shouldUpdateUser() throws TimeTrackerException {
+        // given
+        var user = new User("test-id","existing@email.com", "Name", "pass");
+        var userEntity = userMapper.toEntity(user);
+        Mockito.when(userRepo.findById(Mockito.anyString())).thenReturn(Optional.of(userEntity));
+        // when
+        var result = service.update(user);
+        // then
+        assertNotNull(result.getId());
     }
 
     @Test

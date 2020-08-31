@@ -4,11 +4,10 @@ import br.com.tiagoamp.timetracker.dto.CategoryRequestDTO;
 import br.com.tiagoamp.timetracker.dto.CategoryResponseDTO;
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
 import br.com.tiagoamp.timetracker.dto.UserResponseDTO;
+import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.TimeTrackerException;
-import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.service.UserService;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,11 +29,14 @@ import static java.util.stream.Collectors.toList;
 @RequestMapping("user")
 public class UserController {
 
-    @Autowired
     private UserService userService;
+    private UserMapper userMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    public UserController(UserService userService, UserMapper userMapper) {
+        this.userService = userService;
+        this.userMapper = userMapper;
+    }
 
 
     @PostMapping
@@ -58,7 +59,7 @@ public class UserController {
             user = userService.update(user);
             var userDTO = userMapper.toResponseDTO(user);
             return ResponseEntity.ok(userDTO);
-        } catch (TimeTrackerException e) {
+        } catch (ResourceNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -68,7 +69,7 @@ public class UserController {
         try {
             userService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch (TimeTrackerException e) {
+        } catch (ResourceNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -82,12 +83,8 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<?> getUserById(@NotNull @PathVariable("id") String id) {
-        try {
-            var user = userService.findUserById(id);
-            return ResponseEntity.ok(userMapper.toResponseDTO(user));
-        } catch (TimeTrackerException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        var user = userService.findUserById(id);
+        return ResponseEntity.ok(userMapper.toResponseDTO(user));
     }
 
 
@@ -116,7 +113,7 @@ public class UserController {
         return ResponseEntity.ok(new CategoryResponseDTO());
     }
 
-
+/*
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -128,5 +125,6 @@ public class UserController {
         });
         return errors;
     }
+*/
 
 }

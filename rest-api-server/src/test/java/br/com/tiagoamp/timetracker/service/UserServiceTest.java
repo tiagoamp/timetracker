@@ -1,5 +1,6 @@
 package br.com.tiagoamp.timetracker.service;
 
+import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
 import br.com.tiagoamp.timetracker.model.TimeTrackerException;
@@ -75,7 +76,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("When user exists should update info")
-    void update_shouldUpdateUser() throws TimeTrackerException {
+    void update_shouldUpdateUser() throws ResourceNotFoundException {
         // given
         var user = new User("test-id","existing@email.com", "Name", "pass");
         var userEntity = userMapper.toEntity(user);
@@ -95,7 +96,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("When user id exists should delete user")
-    void delete_shouldDeleteUser() throws TimeTrackerException {
+    void delete_shouldDeleteUser() throws ResourceNotFoundException {
         Mockito.when(userRepo.findById(Mockito.anyString())).thenReturn(Optional.of(new UserEntity()));
         service.delete("test-id");
     }
@@ -128,7 +129,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("When user id exists should return user")
-    void findUserById_shouldReturnUser() throws TimeTrackerException {
+    void findUserById_shouldReturnUser() throws ResourceNotFoundException {
         // given
         var user = new User("test-id","existing@email.com", "Name", "pass");
         var userEntity = userMapper.toEntity(user);

@@ -19,13 +19,6 @@ public class UserEntity {
     private String password;
 
 
-    public void updateInfoFrom(User user) {
-        this.email = user.getEmail();
-        this.name = user.getName();
-        this.password = user.getPassword();
-    }
-
-
     public String getId() {
         return id;
     }

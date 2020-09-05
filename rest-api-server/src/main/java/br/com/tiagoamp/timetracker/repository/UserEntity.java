@@ -1,8 +1,6 @@
 package br.com.tiagoamp.timetracker.repository;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "USERS")

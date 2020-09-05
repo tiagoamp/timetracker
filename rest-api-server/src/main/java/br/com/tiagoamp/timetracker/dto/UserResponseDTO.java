@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponseDTO {
 
-    private String id;
+    private Long id;
 
     private String email;
 
@@ -16,17 +16,17 @@ public class UserResponseDTO {
 
     public UserResponseDTO() { }
 
-    public UserResponseDTO(String id, String email, String name) {
+    public UserResponseDTO(Long id, String email, String name) {
         this.id = id;
         this.email = email;
         this.name = name;
     }
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getEmail() {

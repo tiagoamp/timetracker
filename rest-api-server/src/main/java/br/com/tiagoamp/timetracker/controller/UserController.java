@@ -38,7 +38,7 @@ public class UserController {
         var user = userMapper.toModel(userReqDTO);
         user = userService.create(user);
         var userDTO = userMapper.toResponseDTO(user);
-        return ResponseEntity.created(URI.create(userDTO.getId())).body(userDTO);
+        return ResponseEntity.created(URI.create(userDTO.getId().toString())).body(userDTO);
     }
 
     @PutMapping("{id}")

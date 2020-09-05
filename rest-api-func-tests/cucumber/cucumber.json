@@ -1,0 +1,84 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 24924417071,
+              "status": "passed"
+            },
+            "match": {
+              "location": "UserStepdefs.cleanDataBase()"
+            }
+          }
+        ],
+        "line": 4,
+        "name": "Create User",
+        "description": "",
+        "id": "user-resource;create-user",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1463915846,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "new user info",
+            "match": {
+              "location": "UserStepdefs.newUserInfo()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 49035370,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "Post a request",
+            "match": {
+              "location": "UserStepdefs.postARequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3233360593,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "should create user",
+            "match": {
+              "location": "UserStepdefs.shouldCreateUser()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@USER"
+          }
+        ]
+      }
+    ],
+    "name": "User Resource",
+    "description": "",
+    "id": "user-resource",
+    "keyword": "Feature",
+    "uri": "timetracker/user.feature",
+    "tags": [
+      {
+        "name": "@USER",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

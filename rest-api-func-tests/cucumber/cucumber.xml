@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="29.715881">
+    <testcase classname="User Resource" name="Create User" time="29.715881">
+        <system-out>
+            <![CDATA[Given new user info.........................................................passed
+When Post a request.........................................................passed
+Then should create user.....................................................passed
+]]>
+        </system-out>
+    </testcase>
+</testsuite>

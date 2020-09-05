@@ -21,7 +21,6 @@ public class UserRequestDTO {
     @NotBlank(message = "{required.field}")  @Size(min=4, max=40)
     private String password;
 
-
     public UserRequestDTO() { }
 
     public UserRequestDTO(String email, String name, String password) {

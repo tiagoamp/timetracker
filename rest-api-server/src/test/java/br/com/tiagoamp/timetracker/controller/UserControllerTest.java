@@ -56,9 +56,10 @@ class UserControllerTest {
             .post("/user")
             .content(userJson).contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.name").exists())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.password").exists())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.email").exists());
+            .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("ValidationException")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.details.name").exists())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.details.password").exists())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.details.email").exists());
     }
 
     @Test
@@ -67,7 +68,7 @@ class UserControllerTest {
         UserRequestDTO userReq = new UserRequestDTO("email@email.com","User Test","password");
         String userJson = toJson(userReq);
         User user = userMapper.toModel(userReq);
-        user.setId("id-test");
+        user.setId(1L);
         Mockito.when(userService.create(Mockito.any(User.class))).thenReturn(user);
         mockMvc.perform(MockMvcRequestBuilders
             .post("/user")
@@ -96,7 +97,7 @@ class UserControllerTest {
         UserRequestDTO userReq = new UserRequestDTO("email@email.com","User Test","password");
         String userJson = toJson(userReq);
         User user = userMapper.toModel(userReq);
-        user.setId("id-test");
+        user.setId(1L);
         Mockito.when(userService.update(Mockito.any(User.class))).thenReturn(user);
         mockMvc.perform(MockMvcRequestBuilders
                 .put("/user/{id}", user.getId())
@@ -108,7 +109,7 @@ class UserControllerTest {
     @Test
     @DisplayName("When Delete request with non-existing id Should result error message")
     public void whenDelRequestToUsers_messagesResponse() throws Exception {
-        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).delete(Mockito.anyString());
+        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).delete(Mockito.anyLong());
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/user/{id}", "id-test")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -152,9 +153,9 @@ class UserControllerTest {
     @Test
     @DisplayName("When Get by id request with non-existing user Should return error message")
     public void whenGetByIdRequestToUsers_messagesResponse() throws Exception {
-        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).findUserById(Mockito.anyString());
+        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).findUserById(Mockito.anyLong());
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/user/{id}", "id-test")
+                .get("/user/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
@@ -162,7 +163,7 @@ class UserControllerTest {
     @Test
     @DisplayName("When Get by id request of existing user Should result user")
     public void whenGetByIdRequestToUsers_correctResponse() throws Exception {
-        Mockito.when(userService.findUserById(Mockito.anyString())).thenReturn(new User("id", "email@email.com", "name", "pass"));
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(new User(1L, "email@email.com", "name", "pass"));
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/user/{id}", "id-test")
                 .contentType(MediaType.APPLICATION_JSON))

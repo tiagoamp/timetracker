@@ -27,6 +27,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ResourceAlreadyRegisteredException.class)
+    public ResponseEntity<Object> handleResourceAlreadyRegistered(ResourceAlreadyRegisteredException ex) {
+        ErroDetails error = new ErroDetails(ex.getClass().getSimpleName(), ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> fieldErrors = new HashMap<>();

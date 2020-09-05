@@ -6,22 +6,16 @@ import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
 import br.com.tiagoamp.timetracker.dto.UserResponseDTO;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
-import br.com.tiagoamp.timetracker.model.TimeTrackerException;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -40,19 +34,15 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDTO userReqDTO) {
+    public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userReqDTO) {
         var user = userMapper.toModel(userReqDTO);
-        try {
-            user = userService.create(user);
-            var userDTO = userMapper.toResponseDTO(user);
-            return ResponseEntity.created(URI.create(userDTO.getId())).body(userDTO);
-        } catch (TimeTrackerException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        user = userService.create(user);
+        var userDTO = userMapper.toResponseDTO(user);
+        return ResponseEntity.created(URI.create(userDTO.getId())).body(userDTO);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> updateUser(@NotNull @PathVariable("id") String id, @Valid @RequestBody UserRequestDTO userReqDTO) {
+    public ResponseEntity<?> updateUser(@NotNull @PathVariable("id") Long id, @Valid @RequestBody UserRequestDTO userReqDTO) {
         var user = userMapper.toModel(userReqDTO);
         user.setId(id);
         try {
@@ -65,7 +55,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> removeUser(@NotNull @PathVariable("id") String id) {
+    public ResponseEntity<?> removeUser(@NotNull @PathVariable("id") Long id) {
         try {
             userService.delete(id);
             return ResponseEntity.noContent().build();
@@ -82,7 +72,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getUserById(@NotNull @PathVariable("id") String id) {
+    public ResponseEntity<?> getUserById(@NotNull @PathVariable("id") Long id) {
         var user = userService.findUserById(id);
         return ResponseEntity.ok(userMapper.toResponseDTO(user));
     }

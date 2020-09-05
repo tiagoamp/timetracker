@@ -1,16 +1,16 @@
 package br.com.tiagoamp.timetracker.repository;
 
-import br.com.tiagoamp.timetracker.model.User;
-
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "USERS")
 public class UserEntity {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String email;
 
@@ -19,10 +19,20 @@ public class UserEntity {
     private String password;
 
 
-    public String getId() {
+    public UserEntity() { }
+
+    public UserEntity(Long id, String email, String name, String password) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+    }
+
+
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getEmail() {

@@ -1,5 +1,6 @@
 package timetracker;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -17,9 +18,11 @@ import java.io.IOException;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class UserStepdefs {
+public class UserSteps {
 
     static {
         baseURI = "http://localhost:8080";
@@ -57,20 +60,54 @@ public class UserStepdefs {
                             .toString();
     }
 
+
     @When("^Post a request$")
     public void postARequest() {
         response = given().contentType("application/json").body(userJson)
                   .when().post("/user").then();
     }
 
+    @When("^retrieve user id$")
+    public void retrieve_user_id() throws Exception {
+        Integer id = response.extract().body().jsonPath().get("id");
+        JsonNode jsonNode = objectMapper.readTree(userJson);
+        userJson = ((ObjectNode) jsonNode).put("id", id).toString();
+    }
+
+    @When("^update user info$")
+    public void update_user_info() throws Exception {
+        JsonNode jsonNode = objectMapper.readTree(userJson);
+        userJson = ((ObjectNode) jsonNode).put("name", "Altered Name").toString();
+    }
+
+    @When("^send a Put request$")
+    public void send_a_Put_request() throws Exception {
+        Long id = objectMapper.readTree(userJson).get("id").asLong();
+        response = given().contentType("application/json").body(userJson)
+                .when().put("/user/{id}",id).then();
+    }
+
+
     @Then("^should create user$")
     public void shouldCreateUser() {
         response.statusCode(SC_CREATED);
     }
 
+    @Then("^should return OK$")
+    public void shouldReturnOK() {
+        response.statusCode(SC_OK);
+    }
+
     @Then("^user should have id and links info$")
     public void user_should_have_id_and_links_info() throws Exception {
         response.body("id", notNullValue()).body("_links", notNullValue());
+    }
+
+    @Then("^should update user$")
+    public void should_update_user() throws Exception {
+        Integer id = objectMapper.readTree(userJson).get("id").asInt();
+        String name = objectMapper.readTree(userJson).get("name").asText();
+        response.body("id", is(id)).body("name", is(name));
     }
 
 }

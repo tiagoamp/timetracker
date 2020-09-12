@@ -66,19 +66,6 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("When Post request with user e-mail already that is already registered Should result error message")
-    public void whenPostRequestToUsers_messagesResponse2() throws Exception {
-        UserRequestDTO userReq = new UserRequestDTO("email@email.com","User Test","password");
-        String userJson = toJson(userReq);
-        Mockito.doThrow(ResourceAlreadyRegisteredException.class).when(userService).create(Mockito.any(User.class));
-        mockMvc.perform(MockMvcRequestBuilders
-                .post("/user")
-                .content(userJson).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.title", is("ResourceAlreadyRegisteredException")));
-    }
-
-    @Test
     @DisplayName("When Post request with valid user Should result correct response")
     public void whenPostRequestToUsers_correctResponse() throws Exception {
         UserRequestDTO userReq = new UserRequestDTO("email@email.com","User Test","password");
@@ -100,12 +87,13 @@ class UserControllerTest {
         UserRequestDTO invalidUserReq = new UserRequestDTO();
         String userJson = toJson(invalidUserReq);
         mockMvc.perform(MockMvcRequestBuilders
-                .put("/user/{id}", "id-test")
+                .put("/user/{id}", 1L)
                 .content(userJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.name").exists())
-                .andExpect(jsonPath("$.password").exists())
-                .andExpect(jsonPath("$.email").exists());
+                .andExpect(jsonPath("$.title", is("ValidationException")))
+                .andExpect(jsonPath("$.details.name").exists())
+                .andExpect(jsonPath("$.details.password").exists())
+                .andExpect(jsonPath("$.details.email").exists());
     }
 
     @Test
@@ -120,7 +108,8 @@ class UserControllerTest {
                 .put("/user/{id}", user.getId())
                 .content(userJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$._links", is(not(emptyArray()))));
     }
 
     @Test

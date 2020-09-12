@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="4.748367">
-    <testcase classname="User Resource" name="Create User" time="4.748367">
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="2" time="3.624159">
+    <testcase classname="User Resource" name="Create User" time="3.420236">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 When Post a request.........................................................passed
 Then should create user.....................................................passed
+And user should have id and links info......................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="User Resource" name="Update User" time="0.203923">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And update user info........................................................passed
+And send a Put request......................................................passed
+Then should return OK.......................................................passed
+And should update user......................................................passed
 And user should have id and links info......................................passed
 ]]>
         </system-out>

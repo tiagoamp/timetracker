@@ -52,7 +52,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("When new e-mail should create user")
-    void create_shouldCreateUser() throws TimeTrackerException {
+    void create_shouldCreateUser() {
         // given
         var newUser = new User(1L, "new@email.com", "Name", "");
         var userEntity = userMapper.toEntity(newUser);
@@ -68,9 +68,9 @@ class UserServiceTest {
     @Test
     @DisplayName("When user does not exist should throw exception")
     void update_shouldThrowError() {
-        var newUser = new User(1L,"existing@email.com", "Name", "pass");
+        var newUser = new User(1L,"blah@email.com", "Name", "pass");
         Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-        assertThrows(TimeTrackerException.class, () -> service.update(newUser));
+        assertThrows(ResourceNotFoundException.class, () -> service.update(newUser));
     }
 
     @Test
@@ -80,17 +80,19 @@ class UserServiceTest {
         var user = new User(1L,"existing@email.com", "Name", "pass");
         var userEntity = userMapper.toEntity(user);
         Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(userEntity));
+        Mockito.when(userRepo.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
         // when
         var result = service.update(user);
         // then
         assertNotNull(result.getId());
     }
 
+
     @Test
     @DisplayName("When user id does not exist should throw exception")
     void delete_shouldThrowError() {
         Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-        assertThrows(TimeTrackerException.class, () -> service.delete(1L));
+        assertThrows(ResourceNotFoundException.class, () -> service.delete(1L));
     }
 
     @Test
@@ -123,7 +125,7 @@ class UserServiceTest {
     @DisplayName("When user id does not exist should throw exception")
     void findUserById_shouldThrowError() throws TimeTrackerException {
         Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-        assertThrows(TimeTrackerException.class, () -> service.findUserById(1L));
+        assertThrows(ResourceNotFoundException.class, () -> service.findUserById(1L));
     }
 
     @Test

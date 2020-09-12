@@ -6,11 +6,11 @@
         "before": [
           {
             "result": {
-              "duration": 2157395850,
+              "duration": 2515669073,
               "status": "passed"
             },
             "match": {
-              "location": "UserStepdefs.cleanDataBase()"
+              "location": "UserSteps.cleanDataBase()"
             }
           }
         ],
@@ -23,49 +23,171 @@
         "steps": [
           {
             "result": {
-              "duration": 123081117,
+              "duration": 127716062,
               "status": "passed"
             },
             "line": 5,
-            "name": "new user info",
+            "name": "new valid user info",
             "match": {
-              "location": "UserStepdefs.newUserInfo()"
+              "location": "UserSteps.newUserInfo()"
             },
             "keyword": "Given "
           },
           {
             "result": {
-              "duration": 55336802,
+              "duration": 58572464,
               "status": "passed"
             },
             "line": 6,
             "name": "Post a request",
             "match": {
-              "location": "UserStepdefs.postARequest()"
+              "location": "UserSteps.postARequest()"
             },
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 845045,
+              "duration": 837035,
               "status": "passed"
             },
             "line": 7,
             "name": "should create user",
             "match": {
-              "location": "UserStepdefs.shouldCreateUser()"
+              "location": "UserSteps.shouldCreateUser()"
             },
             "keyword": "Then "
           },
           {
             "result": {
-              "duration": 648718654,
+              "duration": 697264061,
               "status": "passed"
             },
             "line": 8,
             "name": "user should have id and links info",
             "match": {
-              "location": "UserStepdefs.user_should_have_id_and_links_info()"
+              "location": "UserSteps.user_should_have_id_and_links_info()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@USER"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 50013080,
+              "status": "passed"
+            },
+            "match": {
+              "location": "UserSteps.cleanDataBase()"
+            }
+          }
+        ],
+        "line": 10,
+        "name": "Update User",
+        "description": "",
+        "id": "user-resource;update-user",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 280030,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "new valid user info",
+            "match": {
+              "location": "UserSteps.newUserInfo()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 26184671,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "Post a request",
+            "match": {
+              "location": "UserSteps.postARequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 31845923,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "retrieve user id",
+            "match": {
+              "location": "UserSteps.retrieve_user_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 416835,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "update user info",
+            "match": {
+              "location": "UserSteps.update_user_info()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 28698226,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "send a Put request",
+            "match": {
+              "location": "UserSteps.send_a_Put_request()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1483378,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "should return OK",
+            "match": {
+              "location": "UserSteps.shouldReturnOK()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 30879356,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "should update user",
+            "match": {
+              "location": "UserSteps.should_update_user()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 26577746,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "user should have id and links info",
+            "match": {
+              "location": "UserSteps.user_should_have_id_and_links_info()"
             },
             "keyword": "And "
           }

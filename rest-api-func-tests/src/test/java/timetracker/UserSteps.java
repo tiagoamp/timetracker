@@ -9,22 +9,20 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
 
 import static io.restassured.RestAssured.baseURI;
-
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class UserStepdefs {
+public class UserSteps {
 
     static {
         baseURI = "http://localhost:8080";
@@ -53,7 +51,7 @@ public class UserStepdefs {
     }
 
 
-    @Given("^new user info$")
+    @Given("^new valid user info$")
     public void newUserInfo() {
         ObjectNode jsonNodes = JsonNodeFactory.instance.objectNode();
         userJson = jsonNodes.put("email", "test@test.com")
@@ -62,15 +60,42 @@ public class UserStepdefs {
                             .toString();
     }
 
+
     @When("^Post a request$")
     public void postARequest() {
         response = given().contentType("application/json").body(userJson)
                   .when().post("/user").then();
     }
 
+    @When("^retrieve user id$")
+    public void retrieve_user_id() throws Exception {
+        Integer id = response.extract().body().jsonPath().get("id");
+        JsonNode jsonNode = objectMapper.readTree(userJson);
+        userJson = ((ObjectNode) jsonNode).put("id", id).toString();
+    }
+
+    @When("^update user info$")
+    public void update_user_info() throws Exception {
+        JsonNode jsonNode = objectMapper.readTree(userJson);
+        userJson = ((ObjectNode) jsonNode).put("name", "Altered Name").toString();
+    }
+
+    @When("^send a Put request$")
+    public void send_a_Put_request() throws Exception {
+        Long id = objectMapper.readTree(userJson).get("id").asLong();
+        response = given().contentType("application/json").body(userJson)
+                .when().put("/user/{id}",id).then();
+    }
+
+
     @Then("^should create user$")
     public void shouldCreateUser() {
         response.statusCode(SC_CREATED);
+    }
+
+    @Then("^should return OK$")
+    public void shouldReturnOK() {
+        response.statusCode(SC_OK);
     }
 
     @Then("^user should have id and links info$")
@@ -78,24 +103,11 @@ public class UserStepdefs {
         response.body("id", notNullValue()).body("_links", notNullValue());
     }
 
-
-
-    /*
-Feature: Is it Friday yet?
-  Everybody wants to know when it's Friday
-
-  Scenario Outline: Today is or is not Friday
-    Given today is "<day>"
-    When I ask whether it's Friday yet
-    Then I should be told "<answer>"
-
-    Examples:
-      | day            | answer |
-      | Friday         | TGIF   |
-      | Sunday         | Nope   |
-      | anything else! | Nope   |
-
-  */
-
+    @Then("^should update user$")
+    public void should_update_user() throws Exception {
+        Integer id = objectMapper.readTree(userJson).get("id").asInt();
+        String name = objectMapper.readTree(userJson).get("name").asText();
+        response.body("id", is(id)).body("name", is(name));
+    }
 
 }

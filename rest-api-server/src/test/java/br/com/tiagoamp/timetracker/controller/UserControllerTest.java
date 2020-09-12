@@ -1,6 +1,7 @@
 package br.com.tiagoamp.timetracker.controller;
 
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
+import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
 import br.com.tiagoamp.timetracker.model.TimeTrackerException;
@@ -86,12 +87,13 @@ class UserControllerTest {
         UserRequestDTO invalidUserReq = new UserRequestDTO();
         String userJson = toJson(invalidUserReq);
         mockMvc.perform(MockMvcRequestBuilders
-                .put("/user/{id}", "id-test")
+                .put("/user/{id}", 1L)
                 .content(userJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.name").exists())
-                .andExpect(jsonPath("$.password").exists())
-                .andExpect(jsonPath("$.email").exists());
+                .andExpect(jsonPath("$.title", is("ValidationException")))
+                .andExpect(jsonPath("$.details.name").exists())
+                .andExpect(jsonPath("$.details.password").exists())
+                .andExpect(jsonPath("$.details.email").exists());
     }
 
     @Test
@@ -106,7 +108,8 @@ class UserControllerTest {
                 .put("/user/{id}", user.getId())
                 .content(userJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$._links", is(not(emptyArray()))));
     }
 
     @Test

@@ -45,16 +45,12 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> updateUser(@NotNull @PathVariable("id") Long id, @Valid @RequestBody UserRequestDTO userReqDTO) {
+    public ResponseEntity<UserResponseDTO> updateUser(@NotNull @PathVariable("id") Long id, @Valid @RequestBody UserRequestDTO userReqDTO) {
         var user = userMapper.toModel(userReqDTO);
         user.setId(id);
-        try {
-            user = userService.update(user);
-            var userDTO = userMapper.toResponseDTO(user);
-            return ResponseEntity.ok(userDTO);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        user = userService.update(user);
+        var userDTO = userMapper.toResponseDTO(user);
+        return ResponseEntity.ok(userDTO);
     }
 
     @DeleteMapping("{id}")

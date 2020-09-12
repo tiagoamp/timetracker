@@ -6,7 +6,7 @@
         "before": [
           {
             "result": {
-              "duration": 24924417071,
+              "duration": 2157395850,
               "status": "passed"
             },
             "match": {
@@ -23,7 +23,7 @@
         "steps": [
           {
             "result": {
-              "duration": 1463915846,
+              "duration": 123081117,
               "status": "passed"
             },
             "line": 5,
@@ -35,7 +35,7 @@
           },
           {
             "result": {
-              "duration": 49035370,
+              "duration": 55336802,
               "status": "passed"
             },
             "line": 6,
@@ -47,7 +47,7 @@
           },
           {
             "result": {
-              "duration": 3233360593,
+              "duration": 845045,
               "status": "passed"
             },
             "line": 7,
@@ -56,6 +56,18 @@
               "location": "UserStepdefs.shouldCreateUser()"
             },
             "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 648718654,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user should have id and links info",
+            "match": {
+              "location": "UserStepdefs.user_should_have_id_and_links_info()"
+            },
+            "keyword": "And "
           }
         ],
         "tags": [

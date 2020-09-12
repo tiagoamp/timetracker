@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="29.715881">
-    <testcase classname="User Resource" name="Create User" time="29.715881">
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="3.014245">
+    <testcase classname="User Resource" name="Create User" time="3.014245">
         <system-out>
             <![CDATA[Given new user info.........................................................passed
 When Post a request.........................................................passed
 Then should create user.....................................................passed
+And user should have id and links info......................................passed
 ]]>
         </system-out>
     </testcase>

@@ -5,3 +5,4 @@ Feature: User Resource
     Given new user info
     When Post a request
     Then should create user
+    And user should have id and links info

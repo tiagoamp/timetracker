@@ -1,11 +1,16 @@
 package br.com.tiagoamp.timetracker.dto;
 
+import br.com.tiagoamp.timetracker.controller.UserController;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.hateoas.RepresentationModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @JsonPropertyOrder({ "id", "email", "name" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserResponseDTO {
+public class UserResponseDTO extends RepresentationModel<UserResponseDTO> {
 
     private Long id;
 
@@ -17,7 +22,7 @@ public class UserResponseDTO {
     public UserResponseDTO() { }
 
     public UserResponseDTO(Long id, String email, String name) {
-        this.id = id;
+        this.setId(id);  // using setter tod set hateoas info
         this.email = email;
         this.name = name;
     }
@@ -27,7 +32,11 @@ public class UserResponseDTO {
         return id;
     }
     public void setId(Long id) {
+        if (id == null) return;
         this.id = id;
+        this.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
+        this.add(linkTo(methodOn(UserController.class).getAllUsers()).withRel("users"));
+        this.add(linkTo(methodOn(UserController.class).getCategoriesByUser(id)).withRel("user-categories"));
     }
     public String getEmail() {
         return email;

@@ -52,6 +52,7 @@ public class UserStepdefs {
 
     }
 
+
     @Given("^new user info$")
     public void newUserInfo() {
         ObjectNode jsonNodes = JsonNodeFactory.instance.objectNode();
@@ -69,7 +70,12 @@ public class UserStepdefs {
 
     @Then("^should create user$")
     public void shouldCreateUser() {
-        response.statusCode(SC_CREATED).body("id", notNullValue());
+        response.statusCode(SC_CREATED);
+    }
+
+    @Then("^user should have id and links info$")
+    public void user_should_have_id_and_links_info() throws Exception {
+        response.body("id", notNullValue()).body("_links", notNullValue());
     }
 
 

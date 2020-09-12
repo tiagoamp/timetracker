@@ -52,4 +52,14 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.step({
+  "name": "user should have id and links info",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserStepdefs.user_should_have_id_and_links_info()"
+});
+formatter.result({
+  "status": "passed"
+});
 });

@@ -1,6 +1,7 @@
 package br.com.tiagoamp.timetracker.controller;
 
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
+import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
 import br.com.tiagoamp.timetracker.model.TimeTrackerException;
@@ -62,6 +63,19 @@ class UserControllerTest {
             .andExpect(jsonPath("$.details.name").exists())
             .andExpect(jsonPath("$.details.password").exists())
             .andExpect(jsonPath("$.details.email").exists());
+    }
+
+    @Test
+    @DisplayName("When Post request with user e-mail already that is already registered Should result error message")
+    public void whenPostRequestToUsers_messagesResponse2() throws Exception {
+        UserRequestDTO userReq = new UserRequestDTO("email@email.com","User Test","password");
+        String userJson = toJson(userReq);
+        Mockito.doThrow(ResourceAlreadyRegisteredException.class).when(userService).create(Mockito.any(User.class));
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/user")
+                .content(userJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.title", is("ResourceAlreadyRegisteredException")));
     }
 
     @Test

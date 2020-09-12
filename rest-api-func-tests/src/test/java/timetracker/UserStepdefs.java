@@ -1,6 +1,5 @@
 package timetracker;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -9,17 +8,13 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
 
 import static io.restassured.RestAssured.baseURI;
-
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.hamcrest.Matchers.notNullValue;
@@ -53,7 +48,7 @@ public class UserStepdefs {
     }
 
 
-    @Given("^new user info$")
+    @Given("^new valid user info$")
     public void newUserInfo() {
         ObjectNode jsonNodes = JsonNodeFactory.instance.objectNode();
         userJson = jsonNodes.put("email", "test@test.com")
@@ -77,25 +72,5 @@ public class UserStepdefs {
     public void user_should_have_id_and_links_info() throws Exception {
         response.body("id", notNullValue()).body("_links", notNullValue());
     }
-
-
-
-    /*
-Feature: Is it Friday yet?
-  Everybody wants to know when it's Friday
-
-  Scenario Outline: Today is or is not Friday
-    Given today is "<day>"
-    When I ask whether it's Friday yet
-    Then I should be told "<answer>"
-
-    Examples:
-      | day            | answer |
-      | Friday         | TGIF   |
-      | Sunday         | Nope   |
-      | anything else! | Nope   |
-
-  */
-
 
 }

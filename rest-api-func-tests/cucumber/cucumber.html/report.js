@@ -23,7 +23,7 @@ formatter.before({
   "status": "passed"
 });
 formatter.step({
-  "name": "new user info",
+  "name": "new valid user info",
   "keyword": "Given "
 });
 formatter.match({

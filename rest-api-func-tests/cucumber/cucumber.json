@@ -6,7 +6,7 @@
         "before": [
           {
             "result": {
-              "duration": 2157395850,
+              "duration": 3497241761,
               "status": "passed"
             },
             "match": {
@@ -23,11 +23,11 @@
         "steps": [
           {
             "result": {
-              "duration": 123081117,
+              "duration": 240960820,
               "status": "passed"
             },
             "line": 5,
-            "name": "new user info",
+            "name": "new valid user info",
             "match": {
               "location": "UserStepdefs.newUserInfo()"
             },
@@ -35,7 +35,7 @@
           },
           {
             "result": {
-              "duration": 55336802,
+              "duration": 57827031,
               "status": "passed"
             },
             "line": 6,
@@ -47,7 +47,7 @@
           },
           {
             "result": {
-              "duration": 845045,
+              "duration": 633585,
               "status": "passed"
             },
             "line": 7,
@@ -59,7 +59,7 @@
           },
           {
             "result": {
-              "duration": 648718654,
+              "duration": 884472005,
               "status": "passed"
             },
             "line": 8,

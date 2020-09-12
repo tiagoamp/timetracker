@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static br.com.tiagoamp.timetracker.util.JsonUtil.toJson;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
@@ -55,11 +57,11 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
             .post("/user")
             .content(userJson).contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("ValidationException")))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.details.name").exists())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.details.password").exists())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.details.email").exists());
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.title", is("ValidationException")))
+            .andExpect(jsonPath("$.details.name").exists())
+            .andExpect(jsonPath("$.details.password").exists())
+            .andExpect(jsonPath("$.details.email").exists());
     }
 
     @Test
@@ -73,8 +75,9 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
             .post("/user")
             .content(userJson).contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isCreated())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.id").exists())
+            .andExpect(jsonPath("$._links", is(not(emptyArray()))));
     }
 
     @Test
@@ -85,10 +88,10 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .put("/user/{id}", "id-test")
                 .content(userJson).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.password").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").exists());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.name").exists())
+                .andExpect(jsonPath("$.password").exists())
+                .andExpect(jsonPath("$.email").exists());
     }
 
     @Test
@@ -102,8 +105,8 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .put("/user/{id}", user.getId())
                 .content(userJson).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists());
     }
 
     @Test
@@ -113,7 +116,7 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/user/{id}", "id-test")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -122,7 +125,7 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/user/{id}", "id-test")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(status().isNoContent());
     }
 
     @Test
@@ -132,9 +135,9 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/user")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.empty()));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", empty()));
     }
 
     @Test
@@ -145,9 +148,9 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/user")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(registeredUsers.size())));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", hasSize(registeredUsers.size())));
     }
 
     @Test
@@ -157,7 +160,7 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/user/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -167,8 +170,8 @@ class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/user/{id}", "id-test")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists());
     }
 
 

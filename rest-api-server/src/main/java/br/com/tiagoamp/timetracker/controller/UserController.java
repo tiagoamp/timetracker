@@ -54,13 +54,9 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> removeUser(@NotNull @PathVariable("id") Long id) {
-        try {
-            userService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity removeUser(@NotNull @PathVariable("id") Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping

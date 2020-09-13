@@ -44,8 +44,9 @@ public class UserService {
         return userMapper.toModel(entity);
     }
 
-    public void delete(Long userId) throws ResourceNotFoundException {
-        var userEntity = findUserEntityIfExists(userId);
+    public void delete(Long userId) {
+        var userEntity = userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User id: " + userId));
         userRepo.delete(userEntity);
     }
 
@@ -56,12 +57,13 @@ public class UserService {
 
     public User findUserById(Long id) {
         UserEntity entity = userRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User id: "+id));
+                .orElseThrow(() -> new ResourceNotFoundException("User id: " + id));
         return userMapper.toModel(entity);
     }
 
-    public Category createCategory(Long userId, Category category) throws ResourceNotFoundException {
-        var userEntity = findUserEntityIfExists(userId);
+    public Category createCategory(Long userId, Category category) {
+        var userEntity = userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User id: " + userId));
         var categoriesEntityOfThisUser = categoryRepo.retrieveByUser(userId);
         var nameAlreadyExists = categoriesEntityOfThisUser.stream()
                 .filter(cat -> cat.getName().equals(category.getName()))
@@ -98,13 +100,9 @@ public class UserService {
     }
 
 
-    private UserEntity findUserEntityIfExists(Long id) throws ResourceNotFoundException {
-        return userRepo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("User id: "+id));
-    }
-
     private CategoryEntity findCategoryEntityIfExists(Long userId, Integer categoryId) throws ResourceNotFoundException {
-        findUserEntityIfExists(userId);
+        userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User id: " + userId));
         return categoryRepo.retrieveByUser(userId).stream()
                 .filter(cat -> cat.getId().intValue() == categoryId.intValue())
                 .findFirst()

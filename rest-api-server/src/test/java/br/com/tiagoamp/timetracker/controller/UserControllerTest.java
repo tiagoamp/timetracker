@@ -1,13 +1,11 @@
 package br.com.tiagoamp.timetracker.controller;
 
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
-import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
+import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
-import br.com.tiagoamp.timetracker.model.TimeTrackerException;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.service.UserService;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,14 +19,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static br.com.tiagoamp.timetracker.util.JsonUtil.toJson;
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
@@ -115,18 +113,19 @@ class UserControllerTest {
     @Test
     @DisplayName("When Delete request with non-existing id Should result error message")
     public void whenDelRequestToUsers_messagesResponse() throws Exception {
-        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).delete(Mockito.anyLong());
+        Mockito.doThrow(new ResourceNotFoundException("Message")).when(userService).delete(Mockito.anyLong());
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/user/{id}", "id-test")
+                .delete("/user/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.title", is("ResourceNotFoundException")));
     }
 
     @Test
     @DisplayName("When Delete request of existing id Should delete user")
     public void whenDelRequestToUsers_correctResponse() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/user/{id}", "id-test")
+                .delete("/user/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -159,11 +158,12 @@ class UserControllerTest {
     @Test
     @DisplayName("When Get by id request with non-existing user Should return error message")
     public void whenGetByIdRequestToUsers_messagesResponse() throws Exception {
-        Mockito.doThrow(new TimeTrackerException("Message")).when(userService).findUserById(Mockito.anyLong());
+        Mockito.doThrow(new ResourceNotFoundException("Message")).when(userService).findUserById(Mockito.anyLong());
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/user/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.title", is("ResourceNotFoundException")));
     }
 
     @Test
@@ -171,10 +171,12 @@ class UserControllerTest {
     public void whenGetByIdRequestToUsers_correctResponse() throws Exception {
         Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(new User(1L, "email@email.com", "name", "pass"));
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/user/{id}", "id-test")
+                .get("/user/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$._links", is(not(emptyArray()))));;
     }
 
 

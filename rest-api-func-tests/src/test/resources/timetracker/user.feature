@@ -16,3 +16,25 @@ Feature: User Resource
     Then should return OK
     And should update user
     And user should have id and links info
+
+  Scenario: Delete User
+    Given new valid user info
+    When Post a request
+    And retrieve user id
+    And send a Delete request
+    Then should return No Content
+
+  Scenario: Get All Users
+    Given new valid user info
+    When Post a request
+    And send a Get request
+    Then should return OK
+    And should have an array os Users
+
+  Scenario: Get User by id
+    Given new valid user info
+    When Post a request
+    And retrieve user id
+    And send a Get by id request
+    Then should return OK
+    And user should have id and links info

@@ -3,7 +3,6 @@ package br.com.tiagoamp.timetracker.service;
 import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
-import br.com.tiagoamp.timetracker.model.TimeTrackerException;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.repository.CategoryRepository;
 import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
@@ -64,7 +63,6 @@ class UserServiceTest {
         assertNotNull(result.getId());
     }
 
-
     @Test
     @DisplayName("When user does not exist should throw exception")
     void update_shouldThrowError() {
@@ -87,7 +85,6 @@ class UserServiceTest {
         assertNotNull(result.getId());
     }
 
-
     @Test
     @DisplayName("When user id does not exist should throw exception")
     void delete_shouldThrowError() {
@@ -97,7 +94,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("When user id exists should delete user")
-    void delete_shouldDeleteUser() throws ResourceNotFoundException {
+    void delete_shouldDeleteUser() {
         Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
         service.delete(1L);
     }
@@ -123,14 +120,14 @@ class UserServiceTest {
 
     @Test
     @DisplayName("When user id does not exist should throw exception")
-    void findUserById_shouldThrowError() throws TimeTrackerException {
+    void findUserById_shouldThrowError() {
         Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.empty());
         assertThrows(ResourceNotFoundException.class, () -> service.findUserById(1L));
     }
 
     @Test
     @DisplayName("When user id exists should return user")
-    void findUserById_shouldReturnUser() throws ResourceNotFoundException {
+    void findUserById_shouldReturnUser() {
         // given
         var user = new User(1L,"existing@email.com", "Name", "pass");
         var userEntity = userMapper.toEntity(user);
@@ -138,6 +135,7 @@ class UserServiceTest {
         // when
         var result = service.findUserById(user.getId());
         // then
+        assertEquals(user, result);
         assertNotNull(result.getId());
     }
 

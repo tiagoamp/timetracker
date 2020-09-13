@@ -17,10 +17,8 @@ import java.io.IOException;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import static org.apache.http.HttpStatus.SC_CREATED;
-import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.apache.http.HttpStatus.*;
+import static org.hamcrest.Matchers.*;
 
 public class UserSteps {
 
@@ -84,7 +82,27 @@ public class UserSteps {
     public void send_a_Put_request() throws Exception {
         Long id = objectMapper.readTree(userJson).get("id").asLong();
         response = given().contentType("application/json").body(userJson)
-                .when().put("/user/{id}",id).then();
+                   .when().put("/user/{id}",id).then();
+    }
+
+    @When("^send a Delete request$")
+    public void send_a_Delete_request() throws Exception {
+        Long id = objectMapper.readTree(userJson).get("id").asLong();
+        response = given()
+                   .when().delete("/user/{id}",id).then();
+    }
+
+    @When("^send a Get request$")
+    public void send_a_Get_request() throws Exception {
+        response = given()
+                   .when().get("/user").then();
+    }
+
+    @When("^send a Get by id request$")
+    public void send_a_Get_by_id_request() throws Exception {
+        Long id = objectMapper.readTree(userJson).get("id").asLong();
+        response = given()
+                   .when().get("/user/{id}",id).then();
     }
 
 
@@ -98,6 +116,11 @@ public class UserSteps {
         response.statusCode(SC_OK);
     }
 
+    @Then("^should return No Content$")
+    public void should_return_No_Content() {
+        response.statusCode(SC_NO_CONTENT);
+    }
+
     @Then("^user should have id and links info$")
     public void user_should_have_id_and_links_info() throws Exception {
         response.body("id", notNullValue()).body("_links", notNullValue());
@@ -108,6 +131,12 @@ public class UserSteps {
         Integer id = objectMapper.readTree(userJson).get("id").asInt();
         String name = objectMapper.readTree(userJson).get("name").asText();
         response.body("id", is(id)).body("name", is(name));
+    }
+
+    @Then("^should have an array os Users$")
+    public void should_have_an_array_os_Users() throws Exception {
+        JsonNode jsonNode = objectMapper.readTree(userJson);
+        response.body("$", is(not(emptyArray())));
     }
 
 }

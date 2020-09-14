@@ -1,8 +1,5 @@
 package br.com.tiagoamp.timetracker.repository;
 
-import br.com.tiagoamp.timetracker.model.Category;
-import br.com.tiagoamp.timetracker.model.User;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +8,7 @@ public class CategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -22,30 +19,20 @@ public class CategoryEntity {
 
     public CategoryEntity() { }
 
-    public CategoryEntity(Integer id, String name, String description) {
+    public CategoryEntity(Long id, String name, String description, UserEntity userEntity) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.user = userEntity;
+    }
+
+    public CategoryEntity(Long id, String name, String description) {
+        this(id, name, description, null);
     }
 
 
-    public static CategoryEntity from(Category category) {
-        return new CategoryEntity(category.getId(), category.getName(), category.getDescription());
-    }
-
-    public Category toModel() {
-        return new Category(id, name, description);
-    }
-
-    public void updateInfoFrom(Category category) {
-        this.id = category.getId();
-        this.name = category.getName();
-        this.description = category.getDescription();
-    }
-
-
-    public Integer getId() { return id; }
-    public void setId(Integer id) {
+    public Long getId() { return id; }
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() { return name; }

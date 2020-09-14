@@ -9,6 +9,6 @@ import java.util.List;
 public interface TimeEntryRepository extends PagingAndSortingRepository<TimeEntryEntity,Long> {
 
     @Query("SELECT t FROM TimeEntryEntity t WHERE t.category.id = :categoryId")
-    List<TimeEntryEntity> retrieveByCategory(@Param("categoryId") Integer categoryId);
+    List<TimeEntryEntity> retrieveByCategory(@Param("categoryId") Long categoryId);
 
 }

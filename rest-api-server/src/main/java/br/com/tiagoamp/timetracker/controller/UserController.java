@@ -5,7 +5,9 @@ import br.com.tiagoamp.timetracker.dto.CategoryResponseDTO;
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
 import br.com.tiagoamp.timetracker.dto.UserResponseDTO;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
+import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -28,11 +30,13 @@ public class UserController {
 
     private UserService userService;
     private UserMapper userMapper;
+    private CategoryMapper categoryMapper;
 
     @Autowired
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService, UserMapper userMapper, CategoryMapper categoryMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.categoryMapper = categoryMapper;
     }
 
 
@@ -67,49 +71,42 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getUserById(@NotNull @PathVariable("id") Long id) {
+    public ResponseEntity<UserResponseDTO> getUserById(@NotNull @PathVariable("id") Long id) {
         var user = userService.findUserById(id);
         return ResponseEntity.ok(userMapper.toResponseDTO(user));
     }
 
 
     @PostMapping("{userId}/category")
-    public ResponseEntity<CategoryResponseDTO> createCategory(@PathVariable("userId") String userId, @RequestBody CategoryRequestDTO categoryReqDTO) {
-        return ResponseEntity.ok(new CategoryResponseDTO());
+    public ResponseEntity<CategoryResponseDTO> createCategory(@PathVariable("userId") Long userId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
+        var category = categoryMapper.toModel(categoryReqDTO);
+        category = userService.createCategory(userId, category);
+        var categoryDTO = categoryMapper.toResponseDTO(category);
+        categoryDTO.setUserId(userId);
+        return ResponseEntity.created(URI.create(categoryDTO.getId().toString())).body(categoryDTO);
     }
 
     @PutMapping("{userId}/category/{categoryId}")
-    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable("userId") String userId, @PathVariable("categoryId") Long categoryId, @RequestBody CategoryRequestDTO categoryReqDTO) {
+    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable("userId") String userId, @PathVariable("categoryId") Long categoryId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
         return ResponseEntity.ok(new CategoryResponseDTO());
     }
 
     @DeleteMapping("{userId}/category/{categoryId}")
-    public ResponseEntity<?> removeCategory(@PathVariable("userId") String userId, @PathVariable("categoryId") Long categoryId) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> removeCategory(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId) {
+        userService.delete(userId, categoryId);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("{userId}/category")
     public ResponseEntity<List<CategoryResponseDTO>> getCategoriesByUser(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(new ArrayList<>());
+        var categories = userService.findCategories(userId);
+        var dtos = categories.stream().map(categoryMapper::toResponseDTO).collect(toList());
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("{userId}/category/{categoryId}")
-    public ResponseEntity<CategoryResponseDTO> getCategoriesById(@PathVariable("userId") String userId, @PathVariable("categoryId") Long categoryId) {
+    public ResponseEntity<CategoryResponseDTO> getCategoriesById(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId) {
         return ResponseEntity.ok(new CategoryResponseDTO());
     }
-
-/*
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
-*/
 
 }

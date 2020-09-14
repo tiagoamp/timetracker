@@ -2,12 +2,11 @@ package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
+import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.User;
-import br.com.tiagoamp.timetracker.repository.CategoryRepository;
-import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
-import br.com.tiagoamp.timetracker.repository.UserEntity;
-import br.com.tiagoamp.timetracker.repository.UserRepository;
+import br.com.tiagoamp.timetracker.repository.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,6 +35,8 @@ class UserServiceTest {
 
     @Spy  // injects this specific instance to target class
     private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+    @Spy  // injects this specific instance to target class
+    private CategoryMapper catMapper = Mappers.getMapper(CategoryMapper.class);
 
     @InjectMocks
     private UserService service;
@@ -141,7 +142,43 @@ class UserServiceTest {
 
 
     @Test
-    void createCategory() {
+    @DisplayName("When user does not exist should throw exception")
+    void createCategory_shouldThrowError1() {
+        var user = new User(1L,"not-exist@email.com", "Name", "");
+        var category = new Category("cat name", "cat desc");
+        Mockito.when(userRepo.findById(user.getId())).thenReturn(Optional.empty());
+        assertThrows(ResourceNotFoundException.class, () -> service.createCategory(user.getId(), category));
+    }
+
+    @Test
+    @DisplayName("When category name already exist should throw exception")
+    void createCategory_shouldThrowError2() {
+        // given
+        var user = new User(1L,"email@email.com", "Name", "");
+        var category = new Category("cat name", "cat desc");
+        var userEntity = userMapper.toEntity(user);
+        var categoryEntity = catMapper.toEntity(category);
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(userEntity));
+        Mockito.when(categoryRepo.retrieveByUser(user.getId())).thenReturn(Arrays.asList(categoryEntity));
+        assertThrows(ResourceAlreadyRegisteredException.class, () -> service.createCategory(user.getId(), category));
+    }
+
+    @Test
+    @DisplayName("When new category should create category")
+    void createCategory_shouldCreateCategory() {
+        // given
+        var user = new User(1L, "user@email.com", "Name", "");
+        var userEntity = userMapper.toEntity(user);
+        var category = new Category("cat name", "cat desc");
+        var categoryEntity = catMapper.toEntity(category);
+        categoryEntity.setId(10L);
+        Mockito.when(userRepo.findById(user.getId())).thenReturn(Optional.of(userEntity));
+        Mockito.when(categoryRepo.retrieveByUser(user.getId())).thenReturn(new ArrayList<>());
+        Mockito.when(categoryRepo.save(Mockito.any(CategoryEntity.class))).thenReturn(categoryEntity);
+        // when
+        var result = service.createCategory(user.getId(), category);
+        // then
+        assertNotNull(result.getId());
     }
 
     @Test

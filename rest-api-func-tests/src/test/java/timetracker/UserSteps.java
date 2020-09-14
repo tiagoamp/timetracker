@@ -29,20 +29,35 @@ public class UserSteps {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private String userJson = null;
+    private String categoryJson = null;
     private ValidatableResponse response = null;
 
 
     @Before
     public void cleanDataBase() throws IOException {
-        ResponseBody body = given().contentType("application/json")
-                .when().get("/user")
+        // get all users
+        ResponseBody body = given().when().get("/user")
                 .thenReturn().body();
-
         ArrayNode arrNode = objectMapper.readValue(body.asString(), ArrayNode.class);
+
+        // foreach user
         for (int i = 0; i < arrNode.size(); i++) {
             Integer id = arrNode.get(i).get("id").asInt();
-            given().contentType("application/json")
-               .when().delete("/user/{id}", id)
+
+            // get categories of user
+            body = given().when().get("/user/{userId}/category", id)
+                    .thenReturn().body();
+            ArrayNode arrCatNode = objectMapper.readValue(body.asString(), ArrayNode.class);
+
+            // delete categories
+            for (int j = 0; j < arrCatNode.size(); j++) {
+                Integer catId = arrCatNode.get(j).get("id").asInt();
+                given().when().delete("/user/{userId}/category/{catId}", id, catId)
+                        .then().statusCode(HttpStatus.SC_NO_CONTENT);
+            }
+
+            // delete users
+            given().when().delete("/user/{id}", id)
                .then().statusCode(HttpStatus.SC_NO_CONTENT);
         }
 
@@ -56,6 +71,14 @@ public class UserSteps {
                             .put("name", "tiagoamp")
                             .put("password", "1234")
                             .toString();
+    }
+
+    @Given("^new valid category info$")
+    public void new_valid_category_info() throws Exception {
+        ObjectNode jsonNodes = JsonNodeFactory.instance.objectNode();
+        categoryJson = jsonNodes.put("name", "Category Name")
+                .put("description", "Category Description")
+                .toString();
     }
 
 
@@ -106,8 +129,16 @@ public class UserSteps {
     }
 
 
-    @Then("^should create user$")
-    public void shouldCreateUser() {
+    @When("^Post a request for new category$")
+    public void post_a_request_for_new_category() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        response = given().contentType("application/json").body(categoryJson)
+                .when().post("/user/{userId}/category", userId).then();
+    }
+
+
+    @Then("^should return Created$")
+    public void shouldReturnCreated() {
         response.statusCode(SC_CREATED);
     }
 
@@ -121,8 +152,8 @@ public class UserSteps {
         response.statusCode(SC_NO_CONTENT);
     }
 
-    @Then("^user should have id and links info$")
-    public void user_should_have_id_and_links_info() throws Exception {
+    @Then("^should have id and links info$")
+    public void should_have_id_and_links_info() throws Exception {
         response.body("id", notNullValue()).body("_links", notNullValue());
     }
 

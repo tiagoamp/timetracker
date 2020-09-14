@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +35,7 @@ class CategoryRepositoryTest {
     void retrieveByUser2() {
         // given
         UserEntity userEntity = userRepo.save( new UserEntity(1L, "email@email.com", "name", "pass") );
-        CategoryEntity categoryEntity = catRepo.save(new CategoryEntity(10, "cat name", "cat desc", userEntity));
+        CategoryEntity categoryEntity = catRepo.save(new CategoryEntity(10L, "cat name", "cat desc", userEntity));
         // when
         List<CategoryEntity> result = catRepo.retrieveByUser(userEntity.getId());
         // then

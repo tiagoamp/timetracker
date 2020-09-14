@@ -1,23 +1,32 @@
 package br.com.tiagoamp.timetracker.dto;
 
+import br.com.tiagoamp.timetracker.controller.UserController;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.hateoas.RepresentationModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @JsonPropertyOrder({ "id", "name", "description" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CategoryResponseDTO {
+public class CategoryResponseDTO extends RepresentationModel<CategoryResponseDTO> {
 
-    private Integer id;
+    private Long id;
 
     private String name;
 
     private String description;
 
 
-    public Integer getId() {
+    public void setUserId(Long userId) {
+        this.add(linkTo(methodOn(UserController.class).getCategoriesById(userId, id)).withSelfRel());
+    }
+
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {

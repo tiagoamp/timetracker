@@ -1,9 +1,13 @@
 package br.com.tiagoamp.timetracker.controller;
 
+import br.com.tiagoamp.timetracker.dto.CategoryRequestDTO;
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
+import br.com.tiagoamp.timetracker.mapper.CategoryMapperImpl;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
+import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
 @AutoConfigureMockMvc(addFilters = false)
-@ComponentScan(basePackageClasses = {UserMapper.class, UserMapperImpl.class})  // allows mapstruct mappers dep injection
+@ComponentScan(basePackageClasses = {UserMapper.class, UserMapperImpl.class,
+                    CategoryMapper.class, CategoryMapperImpl.class})  // allows mapstruct mappers dep injection
 class UserControllerTest {
 
     @MockBean
@@ -39,10 +44,11 @@ class UserControllerTest {
 
     @Autowired
     private UserMapperImpl userMapper;
+    @Autowired
+    private CategoryMapperImpl categoryMapper;
 
     @Autowired
     UserController userController;
-
 
     @Autowired
     private MockMvc mockMvc;
@@ -177,6 +183,37 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$._links", is(not(emptyArray()))));;
+    }
+
+    @Test
+    @DisplayName("When Post request with invalid category Should result validation messages")
+    public void whenPostRequestToCategories_messagesResponse() throws Exception {
+        CategoryRequestDTO invalidCategoryReq = new CategoryRequestDTO();
+        String catJson = toJson(invalidCategoryReq);
+        final Long userId = 1L;
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/user/{userId}/category", userId)
+                .content(catJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.title", is("ValidationException")))
+                .andExpect(jsonPath("$.details.name").exists());
+    }
+
+    @Test
+    @DisplayName("When Post request with valid category Should result correct response")
+    public void whenPostRequestToCategories_correctResponse() throws Exception {
+        CategoryRequestDTO categoryReq = new CategoryRequestDTO("cat name", "cat description");
+        String catJson = toJson(categoryReq);
+        Category category = categoryMapper.toModel(categoryReq);
+        category.setId(10L);
+        final Long userId = 1L;
+        Mockito.when(userService.createCategory(Mockito.anyLong(), Mockito.any(Category.class))).thenReturn(category);
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/user/{userId}/category", userId)
+                .content(catJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$._links", is(not(emptyArray()))));
     }
 
 

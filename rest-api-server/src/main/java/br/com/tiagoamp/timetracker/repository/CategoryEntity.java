@@ -22,25 +22,15 @@ public class CategoryEntity {
 
     public CategoryEntity() { }
 
-    public CategoryEntity(Integer id, String name, String description) {
+    public CategoryEntity(Integer id, String name, String description, UserEntity userEntity) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.user = userEntity;
     }
 
-
-    public static CategoryEntity from(Category category) {
-        return new CategoryEntity(category.getId(), category.getName(), category.getDescription());
-    }
-
-    public Category toModel() {
-        return new Category(id, name, description);
-    }
-
-    public void updateInfoFrom(Category category) {
-        this.id = category.getId();
-        this.name = category.getName();
-        this.description = category.getDescription();
+    public CategoryEntity(Integer id, String name, String description) {
+        this(id, name, description, null);
     }
 
 

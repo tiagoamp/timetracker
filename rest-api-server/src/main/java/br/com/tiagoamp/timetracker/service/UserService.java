@@ -2,6 +2,7 @@ package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.TimeTrackerException;
@@ -28,6 +29,9 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
 
     public User create(User user) {
@@ -69,17 +73,17 @@ public class UserService {
                 .filter(cat -> cat.getName().equals(category.getName()))
                 .findFirst().isPresent();
         if (nameAlreadyExists) throw new ResourceNotFoundException("Category name already exists");
-        var categoryEntity = CategoryEntity.from(category);
+        var categoryEntity = categoryMapper.toEntity(category);
         categoryEntity.setUser(userEntity);
         categoryEntity = categoryRepo.save(categoryEntity);
-        return categoryEntity.toModel();
+        return categoryMapper.toModel(categoryEntity);
     }
 
     public Category update(Long userId, Category category) throws ResourceNotFoundException {
-        CategoryEntity categoryEntity = findCategoryEntityIfExists(userId, category.getId());
-        categoryEntity.updateInfoFrom(category);
+        findCategoryEntityIfExists(userId, category.getId());
+        var categoryEntity = categoryMapper.toEntity(category);
         categoryEntity = categoryRepo.save(categoryEntity);
-        return categoryEntity.toModel();
+        return categoryMapper.toModel(categoryEntity);
     }
 
     public void delete(Long userId, Integer categoryId) throws ResourceNotFoundException {
@@ -92,11 +96,11 @@ public class UserService {
 
     public List<Category> findCategories(Long userId) {
         return categoryRepo.retrieveByUser(userId).stream()
-                .map(CategoryEntity::toModel).collect(toList());
+                .map(categoryMapper::toModel).collect(toList());
     }
 
     public Category findCategoryById(Long userId, Integer categoryId) throws TimeTrackerException, ResourceNotFoundException {
-        return findCategoryEntityIfExists(userId, categoryId).toModel();
+        return categoryMapper.toModel( findCategoryEntityIfExists(userId, categoryId) );
     }
 
 

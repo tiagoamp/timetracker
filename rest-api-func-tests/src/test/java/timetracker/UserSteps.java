@@ -95,10 +95,23 @@ public class UserSteps {
         userJson = ((ObjectNode) jsonNode).put("id", id).toString();
     }
 
+    @When("^retrieve category id$")
+    public void retrieve_category_id() throws Exception {
+        Integer id = response.extract().body().jsonPath().get("id");
+        JsonNode jsonNode = objectMapper.readTree(categoryJson);
+        categoryJson = ((ObjectNode) jsonNode).put("id", id).toString();
+    }
+
     @When("^update user info$")
     public void update_user_info() throws Exception {
         JsonNode jsonNode = objectMapper.readTree(userJson);
         userJson = ((ObjectNode) jsonNode).put("name", "Altered Name").toString();
+    }
+
+    @When("^update category info$")
+    public void update_category_info() throws Exception {
+        JsonNode jsonNode = objectMapper.readTree(categoryJson);
+        categoryJson = ((ObjectNode) jsonNode).put("name", "Altered Name").toString();
     }
 
     @When("^send a Put request$")
@@ -106,6 +119,14 @@ public class UserSteps {
         Long id = objectMapper.readTree(userJson).get("id").asLong();
         response = given().contentType("application/json").body(userJson)
                    .when().put("/user/{id}",id).then();
+    }
+
+    @When("^send a Put request for Category$")
+    public void send_a_Put_request_for_Category() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
+        response = given().contentType("application/json").body(categoryJson)
+                .when().put("/user/{userId}/category/{categoryId}",userId, categoryId).then();
     }
 
     @When("^send a Delete request$")
@@ -127,7 +148,6 @@ public class UserSteps {
         response = given()
                    .when().get("/user/{id}",id).then();
     }
-
 
     @When("^Post a request for new category$")
     public void post_a_request_for_new_category() throws Exception {

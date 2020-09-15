@@ -153,7 +153,6 @@ class UserServiceTest {
     @Test
     @DisplayName("When category name already exist should throw exception")
     void createCategory_shouldThrowError2() {
-        // given
         var user = new User(1L,"email@email.com", "Name", "");
         var category = new Category("cat name", "cat desc");
         var userEntity = userMapper.toEntity(user);
@@ -182,7 +181,37 @@ class UserServiceTest {
     }
 
     @Test
-    void testUpdate() {
+    @DisplayName("When user does not exist for update should throw exception")
+    void updateCategory_shouldThrowError1() {
+        var category = new Category("cat name", "cat desc");
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        assertThrows(ResourceNotFoundException.class, () -> service.update(1L, category));
+    }
+
+    @Test
+    @DisplayName("When category does not exist for update should throw exception")
+    void updateCategory_shouldThrowError2() {
+        var userId = 1L;
+        var category = new Category("cat name", "cat desc");
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
+        Mockito.when(categoryRepo.retrieveByUser(userId)).thenReturn(new ArrayList<>());
+        assertThrows(ResourceNotFoundException.class, () -> service.update(userId, category));
+    }
+
+    @Test
+    @DisplayName("When category exists should update info")
+    void update_shouldUpdateCategory() throws ResourceNotFoundException {
+        // given
+        var userId = 1L;
+        var category = new Category(10L, "cat name", "cat desc");
+        var categoryEntity = catMapper.toEntity(category);
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
+        Mockito.when(categoryRepo.retrieveByUser(userId)).thenReturn(Arrays.asList(categoryEntity));
+        Mockito.when(categoryRepo.save(Mockito.any(CategoryEntity.class))).thenReturn(categoryEntity);
+        // when
+        var result = service.update(userId, category);
+        // then
+        assertNotNull(result.getId());
     }
 
     @Test

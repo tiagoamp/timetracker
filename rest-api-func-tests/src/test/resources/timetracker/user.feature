@@ -47,3 +47,15 @@ Feature: User Resource
     And Post a request for new category
     Then should return Created
     And should have id and links info
+
+  Scenario: Update Category for User
+    Given new valid user info
+    And new valid category info
+    When Post a request
+    And retrieve user id
+    And Post a request for new category
+    And retrieve category id
+    And update category info
+    And send a Put request for Category
+    Then should return OK
+    And should have id and links info

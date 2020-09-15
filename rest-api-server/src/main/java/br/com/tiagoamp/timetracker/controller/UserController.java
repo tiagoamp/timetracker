@@ -87,8 +87,13 @@ public class UserController {
     }
 
     @PutMapping("{userId}/category/{categoryId}")
-    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable("userId") String userId, @PathVariable("categoryId") Long categoryId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
-        return ResponseEntity.ok(new CategoryResponseDTO());
+    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
+        var category = categoryMapper.toModel(categoryReqDTO);
+        category.setId(categoryId);
+        category = userService.update(userId, category);
+        var categoryDTO = categoryMapper.toResponseDTO(category);
+        categoryDTO.setUserId(userId);
+        return ResponseEntity.ok(categoryDTO);
     }
 
     @DeleteMapping("{userId}/category/{categoryId}")

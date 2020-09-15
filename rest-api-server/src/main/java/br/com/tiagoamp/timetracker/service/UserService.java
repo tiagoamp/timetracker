@@ -78,7 +78,7 @@ public class UserService {
         return categoryMapper.toModel(categoryEntity);
     }
 
-    public Category update(Long userId, Category category) throws ResourceNotFoundException {
+    public Category update(Long userId, Category category) {
         findCategoryEntityIfExists(userId, category.getId());
         var categoryEntity = categoryMapper.toEntity(category);
         categoryEntity = categoryRepo.save(categoryEntity);
@@ -109,7 +109,7 @@ public class UserService {
         return categoryRepo.retrieveByUser(userId).stream()
                 .filter(cat -> cat.getId().intValue() == categoryId.intValue())
                 .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException("Category id: "+categoryId));
+                .orElseThrow(() -> new ResourceNotFoundException("Category id: " + categoryId));
     }
 
 }

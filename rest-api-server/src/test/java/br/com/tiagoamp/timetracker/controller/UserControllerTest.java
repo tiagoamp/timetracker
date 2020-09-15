@@ -216,5 +216,21 @@ class UserControllerTest {
                 .andExpect(jsonPath("$._links", is(not(emptyArray()))));
     }
 
+    @Test
+    @DisplayName("When Put request with valid category Should result correct response")
+    public void whenPutRequestToCategories_correctResponse() throws Exception {
+        CategoryRequestDTO categoryReq = new CategoryRequestDTO("cat name", "cat description");
+        String catJson = toJson(categoryReq);
+        Category category = categoryMapper.toModel(categoryReq);
+        category.setId(10L);
+        final Long userId = 1L;
+        Mockito.when(userService.update(Mockito.anyLong(), Mockito.any(Category.class))).thenReturn(category);
+        mockMvc.perform(MockMvcRequestBuilders
+                .put("/user/{userId}/category/{categoryId}", userId, category.getId())
+                .content(catJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$._links", is(not(emptyArray()))));
+    }
 
 }

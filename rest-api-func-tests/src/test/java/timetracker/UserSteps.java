@@ -136,6 +136,14 @@ public class UserSteps {
                    .when().delete("/user/{id}",id).then();
     }
 
+    @When("^send a Delete request for Category$")
+    public void send_a_Delete_request_for_Category() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
+        response = given()
+                .when().delete("/user/{userId}/category/{categoryId}",userId, categoryId).then();
+    }
+
     @When("^send a Get request$")
     public void send_a_Get_request() throws Exception {
         response = given()

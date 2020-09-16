@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="7" time="3.990183">
-    <testcase classname="User Resource" name="Create User" time="3.01902">
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="8" time="4.857903">
+    <testcase classname="User Resource" name="Create User" time="3.303773">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 When Post a request.........................................................passed
@@ -9,7 +9,7 @@ And should have id and links info...........................................pass
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Update User" time="0.21628">
+    <testcase classname="User Resource" name="Update User" time="0.498175">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 When Post a request.........................................................passed
@@ -22,7 +22,7 @@ And should have id and links info...........................................pass
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Delete User" time="0.183362">
+    <testcase classname="User Resource" name="Delete User" time="0.140586">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 When Post a request.........................................................passed
@@ -32,7 +32,7 @@ Then should return No Content...............................................pass
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Get All Users" time="0.077458">
+    <testcase classname="User Resource" name="Get All Users" time="0.253308">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 When Post a request.........................................................passed
@@ -42,7 +42,7 @@ And should have an array os Users...........................................pass
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Get User by id" time="0.130569">
+    <testcase classname="User Resource" name="Get User by id" time="0.171264">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 When Post a request.........................................................passed
@@ -53,7 +53,7 @@ And should have id and links info...........................................pass
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Create Category for User" time="0.148351">
+    <testcase classname="User Resource" name="Create Category for User" time="0.148363">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 And new valid category info.................................................passed
@@ -65,7 +65,7 @@ And should have id and links info...........................................pass
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Update Category for User" time="0.215143">
+    <testcase classname="User Resource" name="Update Category for User" time="0.190008">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 And new valid category info.................................................passed
@@ -77,6 +77,19 @@ And update category info....................................................pass
 And send a Put request for Category.........................................passed
 Then should return OK.......................................................passed
 And should have id and links info...........................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="User Resource" name="Delete Category for User" time="0.152426">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+And new valid category info.................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And Post a request for new category.........................................passed
+And retrieve category id....................................................passed
+And send a Delete request for Category......................................passed
+Then should return No Content...............................................passed
 ]]>
         </system-out>
     </testcase>

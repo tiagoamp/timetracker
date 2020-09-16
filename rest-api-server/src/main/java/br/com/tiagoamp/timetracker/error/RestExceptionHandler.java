@@ -33,6 +33,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(TimeTrackerOperationException.class)
+    public ResponseEntity<Object> handleTimeTrackerOperation(TimeTrackerOperationException ex) {
+        ErroDetails error = new ErroDetails(ex.getClass().getSimpleName(), ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> fieldErrors = new HashMap<>();

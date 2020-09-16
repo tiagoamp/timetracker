@@ -3,6 +3,7 @@ package br.com.tiagoamp.timetracker.controller;
 import br.com.tiagoamp.timetracker.dto.CategoryRequestDTO;
 import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapperImpl;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
@@ -231,6 +232,26 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$._links", is(not(emptyArray()))));
+    }
+
+    @Test
+    @DisplayName("When Delete category request with category associated to time entry Should result error message")
+    public void whenDelRequestToCategory_messagesResponse() throws Exception {
+        Mockito.doThrow(new TimeTrackerOperationException("Message")).when(userService).delete(Mockito.anyLong(), Mockito.anyLong());
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/user/{userId}/category/{categoryId}", 1L, 10L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.title", is("TimeTrackerOperationException")));
+    }
+
+    @Test
+    @DisplayName("When Delete category request of existing id Should delete category")
+    public void whenDelRequestToCategory_correctResponse() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/user/{userId}/category/{categoryId}", 1L, 10L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
     }
 
 }

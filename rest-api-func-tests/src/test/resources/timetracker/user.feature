@@ -59,3 +59,13 @@ Feature: User Resource
     And send a Put request for Category
     Then should return OK
     And should have id and links info
+
+  Scenario: Delete Category for User
+    Given new valid user info
+    And new valid category info
+    When Post a request
+    And retrieve user id
+    And Post a request for new category
+    And retrieve category id
+    And send a Delete request for Category
+    Then should return No Content

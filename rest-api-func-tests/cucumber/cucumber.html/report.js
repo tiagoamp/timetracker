@@ -550,4 +550,97 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.scenario({
+  "name": "Delete Category for User",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@USER"
+    }
+  ]
+});
+formatter.before({
+  "status": "passed"
+});
+formatter.step({
+  "name": "new valid user info",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "UserSteps.newUserInfo()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "new valid category info",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.new_valid_category_info()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "Post a request",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "UserSteps.postARequest()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "retrieve user id",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.retrieve_user_id()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "Post a request for new category",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.post_a_request_for_new_category()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "retrieve category id",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.retrieve_category_id()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "send a Delete request for Category",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.send_a_Delete_request_for_Category()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "should return No Content",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "UserSteps.should_return_No_Content()"
+});
+formatter.result({
+  "status": "passed"
+});
 });

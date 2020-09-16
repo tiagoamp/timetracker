@@ -2,10 +2,10 @@ package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.Category;
-import br.com.tiagoamp.timetracker.model.TimeTrackerException;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +89,7 @@ public class UserService {
         var categoryEntity = findCategoryEntityIfExists(userId, categoryId);
         var isCategoryUsedInTimeEntries = !timeEntryRepo.retrieveByCategory(categoryId).isEmpty();
         if (isCategoryUsedInTimeEntries)
-            throw new ResourceNotFoundException("Category is associated to existing time entry and cannot be deleted");
+            throw new TimeTrackerOperationException("Category is associated to existing time entry and cannot be deleted");
         categoryRepo.delete(categoryEntity);
     }
 

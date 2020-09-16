@@ -2,6 +2,7 @@ package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.Category;
@@ -215,7 +216,23 @@ class UserServiceTest {
     }
 
     @Test
-    void testDelete() {
+    @DisplayName("When category associated to time entries should not delete (exception)")
+    void deleteCategory_shouldThrowError() {
+        var categoryEntity = new CategoryEntity(10L, "name", "desc", null);
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
+        Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(Arrays.asList(categoryEntity));
+        Mockito.when(timeEntryRepo.retrieveByCategory(Mockito.anyLong())).thenReturn(Arrays.asList(new TimeEntryEntity()));
+        assertThrows(TimeTrackerOperationException.class, () -> service.delete(1L, 10L));
+    }
+
+    @Test
+    @DisplayName("When category id exists and is not associate to time entries should delete category")
+    void delete_shouldDeleteCategory() {
+        var categoryEntity = new CategoryEntity(10L, "name", "desc", null);
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
+        Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(Arrays.asList(categoryEntity));
+        Mockito.when(timeEntryRepo.retrieveByCategory(Mockito.anyLong())).thenReturn(new ArrayList<>());
+        service.delete(1L, 10L);
     }
 
     @Test

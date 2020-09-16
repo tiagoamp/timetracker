@@ -182,7 +182,6 @@ class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$._links", is(not(emptyArray()))));;
     }
 
@@ -252,6 +251,54 @@ class UserControllerTest {
                 .delete("/user/{userId}/category/{categoryId}", 1L, 10L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
+    }
+
+    @Test
+    @DisplayName("When Get All request and no Categories registered Should result empty list")
+    public void whenGetAllRequestToCategories_emptyResponse() throws Exception {
+        Mockito.when(userService.findCategories(Mockito.anyLong())).thenReturn(new ArrayList<>());
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{userId}/category", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", empty()));
+    }
+
+    @Test
+    @DisplayName("When Get All request Should return registered categories list")
+    public void whenGetAllRequestToCategories_correctResponse() throws Exception {
+        var registeredCategories = Arrays.asList(new Category(), new Category());
+        Mockito.when(userService.findCategories(Mockito.anyLong())).thenReturn(registeredCategories);
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{userId}/category", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", hasSize(registeredCategories.size())));
+    }
+
+    @Test
+    @DisplayName("When Get by id request with non-existing category Should return error message")
+    public void whenGetByIdRequestToCategories_messagesResponse() throws Exception {
+        Mockito.doThrow(new ResourceNotFoundException("Message")).when(userService).findCategoryById(Mockito.anyLong(), Mockito.anyLong());
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{userId}/category/{categoryId}", 1L, 10L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.title", is("ResourceNotFoundException")));
+    }
+
+    @Test
+    @DisplayName("When Get by id request of existing category Should result user")
+    public void whenGetByIdRequestToCategories_correctResponse() throws Exception {
+        Mockito.when(userService.findCategoryById(Mockito.anyLong(), Mockito.anyLong())).thenReturn(new Category(10L, "name", "desc"));
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{userId}/category/{categoryId}", 1L, 10L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$._links", is(not(emptyArray()))));;
     }
 
 }

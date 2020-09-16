@@ -150,11 +150,26 @@ public class UserSteps {
                    .when().get("/user").then();
     }
 
+    @When("^send a Get Categories request$")
+    public void send_a_Get_Categories_request() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        response = given()
+                .when().get("/user/{userId}/category",userId).then();
+    }
+
     @When("^send a Get by id request$")
     public void send_a_Get_by_id_request() throws Exception {
         Long id = objectMapper.readTree(userJson).get("id").asLong();
         response = given()
                    .when().get("/user/{id}",id).then();
+    }
+
+    @When("^send a Get Category by id request$")
+    public void send_a_Get_Category_by_id_request() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
+        response = given()
+                .when().get("/user/{userId}/category/{categoryId}",userId,categoryId).then();
     }
 
     @When("^Post a request for new category$")
@@ -192,9 +207,8 @@ public class UserSteps {
         response.body("id", is(id)).body("name", is(name));
     }
 
-    @Then("^should have an array os Users$")
-    public void should_have_an_array_os_Users() throws Exception {
-        JsonNode jsonNode = objectMapper.readTree(userJson);
+    @Then("^should have an array of results$")
+    public void should_have_an_array_of_results() throws Exception {
         response.body("$", is(not(emptyArray())));
     }
 

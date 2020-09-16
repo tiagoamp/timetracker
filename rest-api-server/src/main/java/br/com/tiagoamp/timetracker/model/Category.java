@@ -1,5 +1,7 @@
 package br.com.tiagoamp.timetracker.model;
 
+import java.util.Objects;
+
 public class Category {
 
     private Long id;
@@ -19,6 +21,21 @@ public class Category {
 
     public Category(String name, String description) {
         this(null, name, description);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) &&
+                name.equals(category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
 

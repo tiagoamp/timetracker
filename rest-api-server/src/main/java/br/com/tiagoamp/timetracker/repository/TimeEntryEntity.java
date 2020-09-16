@@ -24,6 +24,17 @@ public class TimeEntryEntity {
     private UserEntity userEntity;
 
 
+    public TimeEntryEntity() { }
+
+    public TimeEntryEntity(LocalDateTime startTime, LocalDateTime endTime, String annotations, CategoryEntity category, UserEntity userEntity) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.annotations = annotations;
+        this.category = category;
+        this.userEntity = userEntity;
+    }
+
+
     public Long getId() {
         return id;
     }

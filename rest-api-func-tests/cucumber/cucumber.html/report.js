@@ -272,11 +272,11 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "should have an array os Users",
+  "name": "should have an array of results",
   "keyword": "And "
 });
 formatter.match({
-  "location": "UserSteps.should_have_an_array_os_Users()"
+  "location": "UserSteps.should_have_an_array_of_results()"
 });
 formatter.result({
   "status": "passed"
@@ -639,6 +639,212 @@ formatter.step({
 });
 formatter.match({
   "location": "UserSteps.should_return_No_Content()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Get Categories of User",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@USER"
+    }
+  ]
+});
+formatter.before({
+  "status": "passed"
+});
+formatter.step({
+  "name": "new valid user info",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "UserSteps.newUserInfo()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "new valid category info",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.new_valid_category_info()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "Post a request",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "UserSteps.postARequest()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "retrieve user id",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.retrieve_user_id()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "Post a request for new category",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.post_a_request_for_new_category()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "retrieve category id",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.retrieve_category_id()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "send a Get Categories request",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.send_a_Get_Categories_request()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "should return OK",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "UserSteps.shouldReturnOK()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "should have an array of results",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.should_have_an_array_of_results()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Get Categories of User",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@USER"
+    }
+  ]
+});
+formatter.before({
+  "status": "passed"
+});
+formatter.step({
+  "name": "new valid user info",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "UserSteps.newUserInfo()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "new valid category info",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.new_valid_category_info()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "Post a request",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "UserSteps.postARequest()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "retrieve user id",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.retrieve_user_id()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "Post a request for new category",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.post_a_request_for_new_category()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "retrieve category id",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.retrieve_category_id()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "send a Get Category by id request",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.send_a_Get_Category_by_id_request()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "should return OK",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "UserSteps.shouldReturnOK()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "should have id and links info",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "UserSteps.should_have_id_and_links_info()"
 });
 formatter.result({
   "status": "passed"

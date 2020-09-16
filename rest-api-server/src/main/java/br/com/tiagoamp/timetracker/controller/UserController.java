@@ -105,13 +105,21 @@ public class UserController {
     @GetMapping("{userId}/category")
     public ResponseEntity<List<CategoryResponseDTO>> getCategoriesByUser(@PathVariable("userId") Long userId) {
         var categories = userService.findCategories(userId);
-        var dtos = categories.stream().map(categoryMapper::toResponseDTO).collect(toList());
+        var dtos = categories.stream()
+                .map(categoryMapper::toResponseDTO)
+                .map(dto -> {
+                    dto.setUserId(userId);
+                    return dto;
+                }).collect(toList());
         return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("{userId}/category/{categoryId}")
     public ResponseEntity<CategoryResponseDTO> getCategoriesById(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId) {
-        return ResponseEntity.ok(new CategoryResponseDTO());
+        var category = userService.findCategoryById(userId, categoryId);
+        var dto = categoryMapper.toResponseDTO(category);
+        dto.setUserId(userId);
+        return ResponseEntity.ok(dto);
     }
 
 }

@@ -6,7 +6,7 @@
         "before": [
           {
             "result": {
-              "duration": 2318521223,
+              "duration": 2370750278,
               "status": "passed"
             },
             "match": {
@@ -23,7 +23,7 @@
         "steps": [
           {
             "result": {
-              "duration": 111578809,
+              "duration": 86616687,
               "status": "passed"
             },
             "line": 5,
@@ -35,7 +35,7 @@
           },
           {
             "result": {
-              "duration": 79243278,
+              "duration": 80101536,
               "status": "passed"
             },
             "line": 6,
@@ -47,7 +47,7 @@
           },
           {
             "result": {
-              "duration": 804424,
+              "duration": 749573,
               "status": "passed"
             },
             "line": 7,
@@ -59,7 +59,7 @@
           },
           {
             "result": {
-              "duration": 758750974,
+              "duration": 612952999,
               "status": "passed"
             },
             "line": 8,
@@ -80,7 +80,7 @@
         "before": [
           {
             "result": {
-              "duration": 69830163,
+              "duration": 71622428,
               "status": "passed"
             },
             "match": {
@@ -97,7 +97,7 @@
         "steps": [
           {
             "result": {
-              "duration": 241831,
+              "duration": 248257,
               "status": "passed"
             },
             "line": 11,
@@ -109,7 +109,7 @@
           },
           {
             "result": {
-              "duration": 25948547,
+              "duration": 20872373,
               "status": "passed"
             },
             "line": 12,
@@ -121,7 +121,7 @@
           },
           {
             "result": {
-              "duration": 53933614,
+              "duration": 28784894,
               "status": "passed"
             },
             "line": 13,
@@ -133,7 +133,7 @@
           },
           {
             "result": {
-              "duration": 2292294,
+              "duration": 285856,
               "status": "passed"
             },
             "line": 14,
@@ -145,7 +145,7 @@
           },
           {
             "result": {
-              "duration": 262854041,
+              "duration": 25249567,
               "status": "passed"
             },
             "line": 15,
@@ -157,7 +157,7 @@
           },
           {
             "result": {
-              "duration": 530668,
+              "duration": 658476,
               "status": "passed"
             },
             "line": 16,
@@ -169,7 +169,7 @@
           },
           {
             "result": {
-              "duration": 28232697,
+              "duration": 30773919,
               "status": "passed"
             },
             "line": 17,
@@ -181,7 +181,7 @@
           },
           {
             "result": {
-              "duration": 46943258,
+              "duration": 26822638,
               "status": "passed"
             },
             "line": 18,
@@ -202,7 +202,7 @@
         "before": [
           {
             "result": {
-              "duration": 83566348,
+              "duration": 62532314,
               "status": "passed"
             },
             "match": {
@@ -219,7 +219,7 @@
         "steps": [
           {
             "result": {
-              "duration": 185430,
+              "duration": 224103,
               "status": "passed"
             },
             "line": 21,
@@ -231,7 +231,7 @@
           },
           {
             "result": {
-              "duration": 20395347,
+              "duration": 16800440,
               "status": "passed"
             },
             "line": 22,
@@ -243,7 +243,7 @@
           },
           {
             "result": {
-              "duration": 14402612,
+              "duration": 15289792,
               "status": "passed"
             },
             "line": 23,
@@ -255,7 +255,7 @@
           },
           {
             "result": {
-              "duration": 17433988,
+              "duration": 16149482,
               "status": "passed"
             },
             "line": 24,
@@ -267,7 +267,7 @@
           },
           {
             "result": {
-              "duration": 557460,
+              "duration": 520992,
               "status": "passed"
             },
             "line": 25,
@@ -288,7 +288,7 @@
         "before": [
           {
             "result": {
-              "duration": 16139491,
+              "duration": 43172514,
               "status": "passed"
             },
             "match": {
@@ -305,7 +305,7 @@
         "steps": [
           {
             "result": {
-              "duration": 226065,
+              "duration": 220090,
               "status": "passed"
             },
             "line": 28,
@@ -317,7 +317,7 @@
           },
           {
             "result": {
-              "duration": 38022613,
+              "duration": 19532377,
               "status": "passed"
             },
             "line": 29,
@@ -329,7 +329,7 @@
           },
           {
             "result": {
-              "duration": 19663192,
+              "duration": 14437606,
               "status": "passed"
             },
             "line": 30,
@@ -341,7 +341,7 @@
           },
           {
             "result": {
-              "duration": 561986,
+              "duration": 593525,
               "status": "passed"
             },
             "line": 31,
@@ -353,13 +353,13 @@
           },
           {
             "result": {
-              "duration": 173877360,
+              "duration": 5240331,
               "status": "passed"
             },
             "line": 32,
-            "name": "should have an array os Users",
+            "name": "should have an array of results",
             "match": {
-              "location": "UserSteps.should_have_an_array_os_Users()"
+              "location": "UserSteps.should_have_an_array_of_results()"
             },
             "keyword": "And "
           }
@@ -374,7 +374,7 @@
         "before": [
           {
             "result": {
-              "duration": 75206372,
+              "duration": 52448537,
               "status": "passed"
             },
             "match": {
@@ -391,7 +391,7 @@
         "steps": [
           {
             "result": {
-              "duration": 237001,
+              "duration": 222169,
               "status": "passed"
             },
             "line": 35,
@@ -403,7 +403,7 @@
           },
           {
             "result": {
-              "duration": 26412711,
+              "duration": 22499731,
               "status": "passed"
             },
             "line": 36,
@@ -415,7 +415,7 @@
           },
           {
             "result": {
-              "duration": 13974209,
+              "duration": 12999176,
               "status": "passed"
             },
             "line": 37,
@@ -427,7 +427,7 @@
           },
           {
             "result": {
-              "duration": 22044506,
+              "duration": 15256639,
               "status": "passed"
             },
             "line": 38,
@@ -439,7 +439,7 @@
           },
           {
             "result": {
-              "duration": 1642859,
+              "duration": 569183,
               "status": "passed"
             },
             "line": 39,
@@ -451,7 +451,7 @@
           },
           {
             "result": {
-              "duration": 27716244,
+              "duration": 60401299,
               "status": "passed"
             },
             "line": 40,
@@ -472,7 +472,7 @@
         "before": [
           {
             "result": {
-              "duration": 53882615,
+              "duration": 68044237,
               "status": "passed"
             },
             "match": {
@@ -489,7 +489,7 @@
         "steps": [
           {
             "result": {
-              "duration": 176274,
+              "duration": 196426,
               "status": "passed"
             },
             "line": 43,
@@ -501,7 +501,7 @@
           },
           {
             "result": {
-              "duration": 205509,
+              "duration": 195860,
               "status": "passed"
             },
             "line": 44,
@@ -513,7 +513,7 @@
           },
           {
             "result": {
-              "duration": 20049390,
+              "duration": 23849650,
               "status": "passed"
             },
             "line": 45,
@@ -525,7 +525,7 @@
           },
           {
             "result": {
-              "duration": 12475319,
+              "duration": 11899116,
               "status": "passed"
             },
             "line": 46,
@@ -537,7 +537,7 @@
           },
           {
             "result": {
-              "duration": 25026665,
+              "duration": 22489310,
               "status": "passed"
             },
             "line": 47,
@@ -549,7 +549,7 @@
           },
           {
             "result": {
-              "duration": 427315,
+              "duration": 499129,
               "status": "passed"
             },
             "line": 48,
@@ -561,7 +561,7 @@
           },
           {
             "result": {
-              "duration": 28524419,
+              "duration": 28327016,
               "status": "passed"
             },
             "line": 49,
@@ -582,7 +582,7 @@
         "before": [
           {
             "result": {
-              "duration": 68600996,
+              "duration": 64899276,
               "status": "passed"
             },
             "match": {
@@ -599,7 +599,7 @@
         "steps": [
           {
             "result": {
-              "duration": 220879,
+              "duration": 241239,
               "status": "passed"
             },
             "line": 52,
@@ -611,7 +611,7 @@
           },
           {
             "result": {
-              "duration": 177611,
+              "duration": 223880,
               "status": "passed"
             },
             "line": 53,
@@ -623,7 +623,7 @@
           },
           {
             "result": {
-              "duration": 17432513,
+              "duration": 23187569,
               "status": "passed"
             },
             "line": 54,
@@ -635,7 +635,7 @@
           },
           {
             "result": {
-              "duration": 15233433,
+              "duration": 13447725,
               "status": "passed"
             },
             "line": 55,
@@ -647,7 +647,7 @@
           },
           {
             "result": {
-              "duration": 20772869,
+              "duration": 19431342,
               "status": "passed"
             },
             "line": 56,
@@ -659,7 +659,7 @@
           },
           {
             "result": {
-              "duration": 12996973,
+              "duration": 11997486,
               "status": "passed"
             },
             "line": 57,
@@ -671,7 +671,7 @@
           },
           {
             "result": {
-              "duration": 314555,
+              "duration": 264014,
               "status": "passed"
             },
             "line": 58,
@@ -683,7 +683,7 @@
           },
           {
             "result": {
-              "duration": 22025940,
+              "duration": 18742962,
               "status": "passed"
             },
             "line": 59,
@@ -695,7 +695,7 @@
           },
           {
             "result": {
-              "duration": 1970646,
+              "duration": 418174,
               "status": "passed"
             },
             "line": 60,
@@ -707,7 +707,7 @@
           },
           {
             "result": {
-              "duration": 23700294,
+              "duration": 22947602,
               "status": "passed"
             },
             "line": 61,
@@ -728,7 +728,7 @@
         "before": [
           {
             "result": {
-              "duration": 56557474,
+              "duration": 45065911,
               "status": "passed"
             },
             "match": {
@@ -745,7 +745,7 @@
         "steps": [
           {
             "result": {
-              "duration": 153853,
+              "duration": 169828,
               "status": "passed"
             },
             "line": 64,
@@ -757,7 +757,7 @@
           },
           {
             "result": {
-              "duration": 136302,
+              "duration": 132018,
               "status": "passed"
             },
             "line": 65,
@@ -769,7 +769,7 @@
           },
           {
             "result": {
-              "duration": 17605860,
+              "duration": 16291974,
               "status": "passed"
             },
             "line": 66,
@@ -781,7 +781,7 @@
           },
           {
             "result": {
-              "duration": 12858646,
+              "duration": 10647527,
               "status": "passed"
             },
             "line": 67,
@@ -793,7 +793,7 @@
           },
           {
             "result": {
-              "duration": 25252551,
+              "duration": 16406224,
               "status": "passed"
             },
             "line": 68,
@@ -805,7 +805,7 @@
           },
           {
             "result": {
-              "duration": 12701571,
+              "duration": 10291220,
               "status": "passed"
             },
             "line": 69,
@@ -817,7 +817,7 @@
           },
           {
             "result": {
-              "duration": 19426031,
+              "duration": 21391190,
               "status": "passed"
             },
             "line": 70,
@@ -829,7 +829,7 @@
           },
           {
             "result": {
-              "duration": 891115,
+              "duration": 441583,
               "status": "passed"
             },
             "line": 71,
@@ -838,6 +838,274 @@
               "location": "UserSteps.should_return_No_Content()"
             },
             "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@USER"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 48090651,
+              "status": "passed"
+            },
+            "match": {
+              "location": "UserSteps.cleanDataBase()"
+            }
+          }
+        ],
+        "line": 73,
+        "name": "Get Categories of User",
+        "description": "",
+        "id": "user-resource;get-categories-of-user",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 173363,
+              "status": "passed"
+            },
+            "line": 74,
+            "name": "new valid user info",
+            "match": {
+              "location": "UserSteps.newUserInfo()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 181321,
+              "status": "passed"
+            },
+            "line": 75,
+            "name": "new valid category info",
+            "match": {
+              "location": "UserSteps.new_valid_category_info()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 16007485,
+              "status": "passed"
+            },
+            "line": 76,
+            "name": "Post a request",
+            "match": {
+              "location": "UserSteps.postARequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 10769701,
+              "status": "passed"
+            },
+            "line": 77,
+            "name": "retrieve user id",
+            "match": {
+              "location": "UserSteps.retrieve_user_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 19411161,
+              "status": "passed"
+            },
+            "line": 78,
+            "name": "Post a request for new category",
+            "match": {
+              "location": "UserSteps.post_a_request_for_new_category()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 12100304,
+              "status": "passed"
+            },
+            "line": 79,
+            "name": "retrieve category id",
+            "match": {
+              "location": "UserSteps.retrieve_category_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 12410227,
+              "status": "passed"
+            },
+            "line": 80,
+            "name": "send a Get Categories request",
+            "match": {
+              "location": "UserSteps.send_a_Get_Categories_request()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 377235,
+              "status": "passed"
+            },
+            "line": 81,
+            "name": "should return OK",
+            "match": {
+              "location": "UserSteps.shouldReturnOK()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2157147,
+              "status": "passed"
+            },
+            "line": 82,
+            "name": "should have an array of results",
+            "match": {
+              "location": "UserSteps.should_have_an_array_of_results()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@USER"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 59711329,
+              "status": "passed"
+            },
+            "match": {
+              "location": "UserSteps.cleanDataBase()"
+            }
+          }
+        ],
+        "line": 84,
+        "name": "Get Categories of User",
+        "description": "",
+        "id": "user-resource;get-categories-of-user",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 160516,
+              "status": "passed"
+            },
+            "line": 85,
+            "name": "new valid user info",
+            "match": {
+              "location": "UserSteps.newUserInfo()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 141193,
+              "status": "passed"
+            },
+            "line": 86,
+            "name": "new valid category info",
+            "match": {
+              "location": "UserSteps.new_valid_category_info()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 26190641,
+              "status": "passed"
+            },
+            "line": 87,
+            "name": "Post a request",
+            "match": {
+              "location": "UserSteps.postARequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 19167039,
+              "status": "passed"
+            },
+            "line": 88,
+            "name": "retrieve user id",
+            "match": {
+              "location": "UserSteps.retrieve_user_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 27430608,
+              "status": "passed"
+            },
+            "line": 89,
+            "name": "Post a request for new category",
+            "match": {
+              "location": "UserSteps.post_a_request_for_new_category()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 12628860,
+              "status": "passed"
+            },
+            "line": 90,
+            "name": "retrieve category id",
+            "match": {
+              "location": "UserSteps.retrieve_category_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 16603822,
+              "status": "passed"
+            },
+            "line": 91,
+            "name": "send a Get Category by id request",
+            "match": {
+              "location": "UserSteps.send_a_Get_Category_by_id_request()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 387094,
+              "status": "passed"
+            },
+            "line": 92,
+            "name": "should return OK",
+            "match": {
+              "location": "UserSteps.shouldReturnOK()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 34823212,
+              "status": "passed"
+            },
+            "line": 93,
+            "name": "should have id and links info",
+            "match": {
+              "location": "UserSteps.should_have_id_and_links_info()"
+            },
+            "keyword": "And "
           }
         ],
         "tags": [

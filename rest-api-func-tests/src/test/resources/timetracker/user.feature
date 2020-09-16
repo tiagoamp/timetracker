@@ -29,7 +29,7 @@ Feature: User Resource
     When Post a request
     And send a Get request
     Then should return OK
-    And should have an array os Users
+    And should have an array of results
 
   Scenario: Get User by id
     Given new valid user info
@@ -69,3 +69,25 @@ Feature: User Resource
     And retrieve category id
     And send a Delete request for Category
     Then should return No Content
+
+  Scenario: Get Categories of User
+    Given new valid user info
+    And new valid category info
+    When Post a request
+    And retrieve user id
+    And Post a request for new category
+    And retrieve category id
+    And send a Get Categories request
+    Then should return OK
+    And should have an array of results
+
+  Scenario: Get Categories of User
+    Given new valid user info
+    And new valid category info
+    When Post a request
+    And retrieve user id
+    And Post a request for new category
+    And retrieve category id
+    And send a Get Category by id request
+    Then should return OK
+    And should have id and links info

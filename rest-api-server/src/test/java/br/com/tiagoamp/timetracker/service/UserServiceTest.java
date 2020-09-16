@@ -236,10 +236,46 @@ class UserServiceTest {
     }
 
     @Test
-    void findCategories() {
+    @DisplayName("When does not exist categories should return empty list")
+    void findCategories_shouldReturnEmptyList() {
+        Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(new ArrayList<>());
+        var result = service.findCategories(1L);
+        assertNotNull(result);
+        assertEquals(0, result.size());
     }
 
     @Test
-    void findCategoryById() {
+    @DisplayName("When categories exist should return categories list")
+    void findCategories_shouldReturnList() {
+        var categoriesEntities = Arrays.asList(new CategoryEntity(), new CategoryEntity());
+        Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(categoriesEntities);
+        var result = service.findCategories(1L);
+        assertNotNull(result);
+        assertEquals(2, result.size());
     }
+
+    @Test
+    @DisplayName("When category id does not exist should throw exception")
+    void findCategoryById_shouldThrowError() {
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
+        Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(new ArrayList<>());
+        assertThrows(ResourceNotFoundException.class, () -> service.findCategoryById(1L, 10L));
+    }
+
+    @Test
+    @DisplayName("When category id exists should return category")
+    void findCategoryById_shouldReturnUser() {
+        // given
+        final Long categoryId = 10L;
+        var category = new Category(categoryId, "name", "desc");
+        var categoryEntity = catMapper.toEntity(category);
+        Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
+        Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(Arrays.asList(categoryEntity));
+        // when
+        var result = service.findCategoryById(1L, categoryId);
+        // then
+        assertEquals(category, result);
+        assertNotNull(result.getId());
+    }
+
 }

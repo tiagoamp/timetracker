@@ -10,9 +10,23 @@ public class TimeEntry {
 
     private LocalDateTime endTime;
 
+    private String annotations;
+
     private Category category;
 
-    private String annotations;
+    private User user;
+
+
+    public TimeEntry() { }
+
+    public TimeEntry(Long id, LocalDateTime startTime, LocalDateTime endTime, String annotations, Category category, User user) {
+        this.id = id;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.annotations = annotations;
+        this.category = category;
+        this.user = user;
+    }
 
 
     public Long getId() {
@@ -42,6 +56,12 @@ public class TimeEntry {
     }
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

@@ -10,6 +10,7 @@ import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
 import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.User;
+import br.com.tiagoamp.timetracker.service.TimeService;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,8 @@ class UserControllerTest {
 
     @MockBean
     private UserService userService;
+    @MockBean
+    private TimeService timeService;
 
     @Autowired
     private UserMapperImpl userMapper;

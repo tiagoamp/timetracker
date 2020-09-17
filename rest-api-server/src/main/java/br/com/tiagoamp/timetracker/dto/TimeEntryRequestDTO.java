@@ -1,32 +1,49 @@
 package br.com.tiagoamp.timetracker.dto;
 
-import br.com.tiagoamp.timetracker.model.Category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@JsonPropertyOrder({ "userId", "category", "startTime", "endTime", "durationInMinutes", "annotations" })
+@JsonPropertyOrder({ "userId", "categoryId", "startTime", "endTime", "durationInMinutes", "annotations" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TimeEntryRequestDTO {
 
-    @NotBlank(message = "{required.field}")
-    private String userId;
+    @NotNull(message = "{required.field}")
+    private Long userId;
 
     @NotNull(message = "{required.field}")
-    private Category category;
+    private Long categoryId;
 
     @NotNull(message = "{required.field}")  @PastOrPresent
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime startTime;
 
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime endTime;
 
-    @Max(255)
+    @Size(min=1, max=255)
     private String annotations;
+
+
+    public TimeEntryRequestDTO() { }
+
+    public TimeEntryRequestDTO(Long userId, Long categoryId, LocalDateTime startTime, LocalDateTime endTime, String annotations) {
+        this.userId = userId;
+        this.categoryId = categoryId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.annotations = annotations;
+    }
 
 
     public LocalDateTime getStartTime() {
@@ -41,17 +58,23 @@ public class TimeEntryRequestDTO {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-    public Category getCategory() {
-        return category;
-    }
-    public void setCategory(Category category) {
-        this.category = category;
-    }
     public String getAnnotations() {
         return annotations;
     }
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
+    }
+    public Long getUserId() {
+        return userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    public Long getCategoryId() {
+        return categoryId;
+    }
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
 }

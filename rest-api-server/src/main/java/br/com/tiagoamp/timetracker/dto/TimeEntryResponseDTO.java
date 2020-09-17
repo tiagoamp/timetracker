@@ -1,18 +1,28 @@
 package br.com.tiagoamp.timetracker.dto;
 
+import br.com.tiagoamp.timetracker.controller.TimeEntryController;
+import br.com.tiagoamp.timetracker.controller.UserController;
 import br.com.tiagoamp.timetracker.model.Category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 
-@JsonPropertyOrder({ "id", "category", "startTime", "endTime", "durationInMinutes", "annotations" })
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+@JsonPropertyOrder({ "id", "userId", "categoryId", "categoryName", "startTime", "endTime", "durationInMinutes", "annotations" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TimeEntryResponseDTO {
+public class TimeEntryResponseDTO extends RepresentationModel<TimeEntryResponseDTO> {
 
     private Long id;
 
-    private Category category;
+    private Long userId;
+
+    private Long categoryId;
+
+    private String categoryName;
 
     private LocalDateTime startTime;
 
@@ -27,7 +37,10 @@ public class TimeEntryResponseDTO {
         return id;
     }
     public void setId(Long id) {
+        if (id == null) return;
         this.id = id;
+        this.add(linkTo(methodOn(TimeEntryController.class).getTimeEntryById(id)).withSelfRel());
+        this.add(linkTo(methodOn(TimeEntryController.class).getTimeEntriesByUsers(userId)).withRel("user-time-entries"));
     }
     public LocalDateTime getStartTime() {
         return startTime;
@@ -41,11 +54,11 @@ public class TimeEntryResponseDTO {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-    public Category getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
     public String getAnnotations() {
         return annotations;
@@ -58,6 +71,17 @@ public class TimeEntryResponseDTO {
     }
     public void setDurationInMinutes(Integer durationInMinutes) {
         this.durationInMinutes = durationInMinutes;
+    }
+    public Long getCategoryId() {
+        return categoryId;
+    }
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }    public Long getUserId() {
+        return userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 }

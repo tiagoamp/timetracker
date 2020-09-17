@@ -18,7 +18,7 @@ public class TimeEntryEntity {
     private String annotations;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private CategoryEntity category;
+    private CategoryEntity categoryEntity;
 
     @OneToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;
@@ -26,11 +26,12 @@ public class TimeEntryEntity {
 
     public TimeEntryEntity() { }
 
-    public TimeEntryEntity(LocalDateTime startTime, LocalDateTime endTime, String annotations, CategoryEntity category, UserEntity userEntity) {
+    public TimeEntryEntity(Long id, LocalDateTime startTime, LocalDateTime endTime, String annotations, CategoryEntity categoryEntity, UserEntity userEntity) {
+        this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.annotations = annotations;
-        this.category = category;
+        this.categoryEntity = categoryEntity;
         this.userEntity = userEntity;
     }
 
@@ -53,15 +54,23 @@ public class TimeEntryEntity {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-    public CategoryEntity getCategory() { return category; }
-    public void setCategory(CategoryEntity category) {
-        this.category = category;
+    public CategoryEntity getCategoryEntity() {
+        return categoryEntity;
+    }
+    public void setCategoryEntity(CategoryEntity categoryEntity) {
+        this.categoryEntity = categoryEntity;
     }
     public String getAnnotations() {
         return annotations;
     }
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
+    }
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
 }

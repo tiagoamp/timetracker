@@ -18,33 +18,34 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepo;
-
-    @Autowired
     private CategoryRepository categoryRepo;
-
-    @Autowired
     private TimeEntryRepository timeEntryRepo;
-
-    @Autowired
     private UserMapper userMapper;
+    private CategoryMapper categoryMapper;
+
 
     @Autowired
-    private CategoryMapper categoryMapper;
+    public UserService(UserRepository userRepo, CategoryRepository categoryRepo, TimeEntryRepository timeEntryRepo, UserMapper userMapper, CategoryMapper categoryMapper) {
+        this.userRepo = userRepo;
+        this.categoryRepo = categoryRepo;
+        this.timeEntryRepo = timeEntryRepo;
+        this.userMapper = userMapper;
+        this.categoryMapper = categoryMapper;
+    }
 
 
     public User create(User user) {
         if ( userRepo.findByEmail(user.getEmail()).isPresent() )
             throw new ResourceAlreadyRegisteredException("User e-mail already exists");
-        UserEntity entity = userRepo.save(userMapper.toEntity(user));
+        var entity = userRepo.save(userMapper.toEntity(user));
         return userMapper.toModel(entity);
     }
 
     public User update(User userWithId) {
         userRepo.findById(userWithId.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User id: "+userWithId.getId()));
-        UserEntity entity = userRepo.save(userMapper.toEntity(userWithId));
+        var entity = userRepo.save(userMapper.toEntity(userWithId));
         return userMapper.toModel(entity);
     }
 
@@ -60,7 +61,7 @@ public class UserService {
     }
 
     public User findUserById(Long id) {
-        UserEntity entity = userRepo.findById(id)
+        var entity = userRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User id: " + id));
         return userMapper.toModel(entity);
     }

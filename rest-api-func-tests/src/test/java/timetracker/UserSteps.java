@@ -20,17 +20,7 @@ import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
 
-public class UserSteps {
-
-    static {
-        baseURI = "http://localhost:8080";
-    }
-
-    private ObjectMapper objectMapper = new ObjectMapper();
-
-    private String userJson = null;
-    private String categoryJson = null;
-    private ValidatableResponse response = null;
+public class UserSteps extends GlobalSteps {
 
 
     @Before
@@ -48,17 +38,16 @@ public class UserSteps {
             body = given().when().get("/user/{userId}/category", id)
                     .thenReturn().body();
             ArrayNode arrCatNode = objectMapper.readValue(body.asString(), ArrayNode.class);
-
             // delete categories
-            for (int j = 0; j < arrCatNode.size(); j++) {
-                Integer catId = arrCatNode.get(j).get("id").asInt();
+            for (int k = 0; k < arrCatNode.size(); k++) {
+                Integer catId = arrCatNode.get(k).get("id").asInt();
                 given().when().delete("/user/{userId}/category/{catId}", id, catId)
                         .then().statusCode(HttpStatus.SC_NO_CONTENT);
             }
 
             // delete users
             given().when().delete("/user/{id}", id)
-               .then().statusCode(HttpStatus.SC_NO_CONTENT);
+                    .then().statusCode(HttpStatus.SC_NO_CONTENT);
         }
 
     }
@@ -86,6 +75,13 @@ public class UserSteps {
     public void postARequest() {
         response = given().contentType("application/json").body(userJson)
                   .when().post("/user").then();
+    }
+
+    @When("^Post a request for new category$")
+    public void post_a_request_for_new_category() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        response = given().contentType("application/json").body(categoryJson)
+                .when().post("/user/{userId}/category", userId).then();
     }
 
     @When("^retrieve user id$")
@@ -170,13 +166,6 @@ public class UserSteps {
         Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
         response = given()
                 .when().get("/user/{userId}/category/{categoryId}",userId,categoryId).then();
-    }
-
-    @When("^Post a request for new category$")
-    public void post_a_request_for_new_category() throws Exception {
-        Long userId = objectMapper.readTree(userJson).get("id").asLong();
-        response = given().contentType("application/json").body(categoryJson)
-                .when().post("/user/{userId}/category", userId).then();
     }
 
 

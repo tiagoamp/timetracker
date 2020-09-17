@@ -39,7 +39,7 @@ class TimeEntryRepositoryTest {
         // given
         UserEntity userEntity = userRepo.save( new UserEntity(null, "email@email.com", "name", "pass") );
         CategoryEntity categoryEntity = catRepo.save( new CategoryEntity(null, "cat name", "cat desc", userEntity) );
-        TimeEntryEntity timeEntity = timeRepo.save( new TimeEntryEntity(LocalDateTime.now(), LocalDateTime.now(), null, categoryEntity, userEntity) );
+        TimeEntryEntity timeEntity = timeRepo.save( new TimeEntryEntity(null, LocalDateTime.now(), LocalDateTime.now(), null, categoryEntity, userEntity) );
         // when
         List<TimeEntryEntity> result = timeRepo.retrieveByCategory(categoryEntity.getId());
         // then

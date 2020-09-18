@@ -41,8 +41,8 @@ public class TimeEntryController {
         return ResponseEntity.ok(new TimeEntryResponseDTO());
     }
 
-    @DeleteMapping("{timeId}")
-    public ResponseEntity removeTimeEntry(@PathVariable("timeId") String timeId) {
+    @DeleteMapping("{timeId}/user/{userId}")
+    public ResponseEntity removeTimeEntry(@PathVariable("timeId") Long timeId, @PathVariable("userId") Long userId) {
         return ResponseEntity.noContent().build();
     }
 

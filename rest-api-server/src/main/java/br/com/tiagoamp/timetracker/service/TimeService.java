@@ -1,6 +1,7 @@
 package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.TimeEntryMapper;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
 import br.com.tiagoamp.timetracker.repository.*;
@@ -34,6 +35,10 @@ public class TimeService {
         TimeEntryEntity timeEntryEntity = timeMapper.toEntity(timeEntry);
         timeEntryEntity = timeEntryRepo.save(timeEntryEntity);
         return timeMapper.toModel(timeEntryEntity);
+    }
+
+    public void delete(Long userId, Long timeId) {
+        // usar novo metodo no DAO
     }
 
 }

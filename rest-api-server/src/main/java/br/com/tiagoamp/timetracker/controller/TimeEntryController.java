@@ -42,12 +42,12 @@ public class TimeEntryController {
         return ResponseEntity.ok(new TimeEntryResponseDTO());
     }
 
-    @DeleteMapping("{timeId}/user/{userId}")
+    @DeleteMapping("{timeId}")
     public ResponseEntity removeTimeEntry(@PathVariable("timeId") Long timeId, @PathVariable("userId") Long userId) {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("user/{userId}")
+    @GetMapping()
     public ResponseEntity<List<TimeEntryResponseDTO>> getTimeEntriesByUsers(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(new ArrayList<>());
     }

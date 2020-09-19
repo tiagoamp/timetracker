@@ -12,12 +12,9 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@JsonPropertyOrder({ "userId", "categoryId", "startTime", "endTime", "durationInMinutes", "annotations" })
+@JsonPropertyOrder({ "categoryId", "startTime", "endTime", "durationInMinutes", "annotations" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TimeEntryRequestDTO {
-
-    @NotNull(message = "{required.field}")
-    private Long userId;
 
     @NotNull(message = "{required.field}")
     private Long categoryId;
@@ -37,8 +34,7 @@ public class TimeEntryRequestDTO {
 
     public TimeEntryRequestDTO() { }
 
-    public TimeEntryRequestDTO(Long userId, Long categoryId, LocalDateTime startTime, LocalDateTime endTime, String annotations) {
-        this.userId = userId;
+    public TimeEntryRequestDTO(Long categoryId, LocalDateTime startTime, LocalDateTime endTime, String annotations) {
         this.categoryId = categoryId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -63,12 +59,6 @@ public class TimeEntryRequestDTO {
     }
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
-    }
-    public Long getUserId() {
-        return userId;
-    }
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
     public Long getCategoryId() {
         return categoryId;

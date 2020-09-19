@@ -33,16 +33,12 @@ class TimeServiceTest {
     @Mock
     private TimeEntryRepository timeEntryRepo;
     @Mock
-    private UserRepository userRepo;
+    private UserService userService;
     @Mock
-    private CategoryRepository categoryRepo;
+    private CategoryService categoryService;
 
     @Spy  // injects this specific instance to target class
     private TimeEntryMapper timeMapper = Mappers.getMapper(TimeEntryMapper.class);
-    @Spy
-    private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-    @Spy
-    private CategoryMapper catMapper = Mappers.getMapper(CategoryMapper.class);
 
     @InjectMocks
     private TimeService service;
@@ -53,41 +49,39 @@ class TimeServiceTest {
     void create_shouldThrowError1() {
         var category = new Category(10L, "name", "description");
         var user = new User(1L, "email@email.com", "name", "passwd");
-        var entry = new TimeEntry(null, LocalDateTime.now(), LocalDateTime.now(), "annot", category, user);
-        Mockito.when(userRepo.findById(user.getId())).thenReturn(Optional.empty());
-        assertThrows(ResourceNotFoundException.class, () -> service.create(entry));
+        var entry = new TimeEntry(null, LocalDateTime.now(), LocalDateTime.now(), "annot", category);
+        Mockito.when(userService.findUserById(user.getId())).thenThrow(ResourceNotFoundException.class);
+        assertThrows(ResourceNotFoundException.class, () -> service.create(user.getId(), entry));
     }
 
     @Test
     @DisplayName("When category does not exist should throw exception")
     void create_shouldThrowError2() {
-        var category = new Category(10L, "name", "description");
         var user = new User(1L, "email@email.com", "name", "passwd");
-        var userEntity = userMapper.toEntity(user);
-        var entry = new TimeEntry(null, LocalDateTime.now(), LocalDateTime.now(), "annot", category, user);
-        Mockito.when(userRepo.findById(user.getId())).thenReturn(Optional.of(userEntity));
-        Mockito.when(categoryRepo.retrieveByUser(user.getId())).thenReturn(new ArrayList<>());
-        assertThrows(ResourceNotFoundException.class, () -> service.create(entry));
+        var category = new Category(10L, "name", "description");
+        var entry = new TimeEntry(null, LocalDateTime.now(), LocalDateTime.now(), "annot", category);
+        Mockito.when(userService.findUserById(user.getId())).thenReturn(user);
+        Mockito.when(categoryService.findCategories(user.getId())).thenThrow(ResourceNotFoundException.class);
+        assertThrows(ResourceNotFoundException.class, () -> service.create(user.getId(), entry));
     }
 
     @Test
     @DisplayName("When correct time entry should create time entry")
     void create_shouldCreateTimeEntry() {
         // given
-        var userEntity = new UserEntity(1L, "email@email.com", "name", "passwd");
+        var user = new User(1L, "email@email.com", "name", "passwd");
         var categoryEntity = new CategoryEntity(10L, "name", "description");
-        categoryEntity.setUser(userEntity);
-        var timeEntryEntity = new TimeEntryEntity(100L, LocalDateTime.now(), LocalDateTime.now(), "annot", categoryEntity, userEntity);
+        categoryEntity.setUserWithId(user.getId());
+        var timeEntryEntity = new TimeEntryEntity(100L, LocalDateTime.now(), LocalDateTime.now(), "annot", categoryEntity);
         var entry = timeMapper.toModel(timeEntryEntity);
-        Mockito.when(userRepo.findById(userEntity.getId())).thenReturn(Optional.of(userEntity));
-        Mockito.when(categoryRepo.retrieveByUser(userEntity.getId())).thenReturn(Arrays.asList(categoryEntity));
+        Mockito.when(userService.findUserById(user.getId())).thenReturn(user);
+        Mockito.when(categoryService.findCategories(user.getId())).thenReturn(Arrays.asList(new Category()));
         Mockito.when(timeEntryRepo.save(Mockito.any(TimeEntryEntity.class))).thenReturn(timeEntryEntity);
         // when
-        var result = service.create(entry);
+        var result = service.create(user.getId(), entry);
         // then
         assertNotNull(result.getId());
         assertNotNull(result.getCategory().getId());
-        assertNotNull(result.getUser().getId());
     }
 
 }

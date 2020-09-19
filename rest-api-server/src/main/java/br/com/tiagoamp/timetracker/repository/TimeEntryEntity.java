@@ -20,19 +20,15 @@ public class TimeEntryEntity {
     @OneToOne(fetch = FetchType.EAGER)
     private CategoryEntity categoryEntity;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private UserEntity userEntity;
-
 
     public TimeEntryEntity() { }
 
-    public TimeEntryEntity(Long id, LocalDateTime startTime, LocalDateTime endTime, String annotations, CategoryEntity categoryEntity, UserEntity userEntity) {
+    public TimeEntryEntity(Long id, LocalDateTime startTime, LocalDateTime endTime, String annotations, CategoryEntity categoryEntity) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.annotations = annotations;
         this.categoryEntity = categoryEntity;
-        this.userEntity = userEntity;
     }
 
 
@@ -65,12 +61,6 @@ public class TimeEntryEntity {
     }
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
-    }
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-    public UserEntity getUserEntity() {
-        return userEntity;
     }
 
 }

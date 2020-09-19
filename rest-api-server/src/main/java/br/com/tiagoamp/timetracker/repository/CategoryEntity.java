@@ -17,6 +17,7 @@ public class CategoryEntity {
     @OneToOne
     private UserEntity user;
 
+
     public CategoryEntity() { }
 
     public CategoryEntity(Long id, String name, String description, UserEntity userEntity) {
@@ -30,6 +31,12 @@ public class CategoryEntity {
         this(id, name, description, null);
     }
 
+
+    public void setUserWithId(Long userId) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userId);
+        this.setUser(userEntity);
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) {

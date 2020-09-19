@@ -1,14 +1,9 @@
 package br.com.tiagoamp.timetracker.controller;
 
-import br.com.tiagoamp.timetracker.dto.CategoryRequestDTO;
 import br.com.tiagoamp.timetracker.dto.TimeEntryRequestDTO;
-import br.com.tiagoamp.timetracker.dto.UserRequestDTO;
-import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
-import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.*;
-import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
-import br.com.tiagoamp.timetracker.model.User;
+import br.com.tiagoamp.timetracker.service.CategoryService;
 import br.com.tiagoamp.timetracker.service.TimeService;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -26,8 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static br.com.tiagoamp.timetracker.util.JsonUtil.toJson;
 import static org.hamcrest.Matchers.*;
@@ -37,22 +30,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
 @AutoConfigureMockMvc(addFilters = false)
-@ComponentScan(basePackageClasses = {UserMapper.class, UserMapperImpl.class,
-                    CategoryMapper.class, CategoryMapperImpl.class,
-                    TimeEntryMapper.class, TimeEntryMapperImpl.class})  // allows mapstruct mappers dep injection
+@ComponentScan(basePackageClasses = {TimeEntryMapper.class, TimeEntryMapperImpl.class})  // allows mapstruct mappers dep injection
 class TimeEntryControllerTest {
 
     @MockBean
+    private TimeService timeService;
+    @MockBean
     private UserService userService;
     @MockBean
-    private TimeService timeService;
+    private CategoryService categoryService;
 
     @Autowired
     private TimeEntryMapperImpl timeMapper;
-    @Autowired
-    private UserMapperImpl userMapper;
-    @Autowired
-    private CategoryMapperImpl categoryMapper;
 
     @Autowired
     TimeEntryController timeController;
@@ -67,11 +56,10 @@ class TimeEntryControllerTest {
         TimeEntryRequestDTO invalidTimeReq = new TimeEntryRequestDTO();
         String timeJson = toJson(invalidTimeReq);
         mockMvc.perform(MockMvcRequestBuilders
-            .post("/time")
+            .post("/user/{userId}/time", 1L)
             .content(timeJson).contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.title", is("ValidationException")))
-            .andExpect(jsonPath("$.details.userId").exists())
             .andExpect(jsonPath("$.details.categoryId").exists())
             .andExpect(jsonPath("$.details.startTime").exists());
     }
@@ -79,14 +67,13 @@ class TimeEntryControllerTest {
     @Test
     @DisplayName("When Post request with valid time entry Should result correct response")
     public void whenPostRequestToUsers_correctResponse() throws Exception {
-        TimeEntryRequestDTO timeReq = new TimeEntryRequestDTO(1L, 10L, LocalDateTime.now(), null, null);
+        TimeEntryRequestDTO timeReq = new TimeEntryRequestDTO(10L, LocalDateTime.now(), null, null);
         String timeJson = toJson(timeReq);
-        System.out.println(">>>>"  + timeJson);
         TimeEntry entry = timeMapper.toModel(timeReq);
         entry.setId(100L);
-        Mockito.when(timeService.create(Mockito.any(TimeEntry.class))).thenReturn(entry);
+        Mockito.when(timeService.create(Mockito.anyLong(), Mockito.any(TimeEntry.class))).thenReturn(entry);
         mockMvc.perform(MockMvcRequestBuilders
-            .post("/time")
+            .post("/user/{userid}/time", 1L)
             .content(timeJson).contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id").exists())

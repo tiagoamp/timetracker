@@ -14,18 +14,15 @@ public class TimeEntry {
 
     private Category category;
 
-    private User user;
-
 
     public TimeEntry() { }
 
-    public TimeEntry(Long id, LocalDateTime startTime, LocalDateTime endTime, String annotations, Category category, User user) {
+    public TimeEntry(Long id, LocalDateTime startTime, LocalDateTime endTime, String annotations, Category category) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.annotations = annotations;
         this.category = category;
-        this.user = user;
     }
 
 
@@ -56,12 +53,6 @@ public class TimeEntry {
     }
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
     }
 
 }

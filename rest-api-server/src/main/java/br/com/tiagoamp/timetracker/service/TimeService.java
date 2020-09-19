@@ -1,15 +1,22 @@
 package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.TimeEntryMapper;
+import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
+import br.com.tiagoamp.timetracker.repository.CategoryEntity;
 import br.com.tiagoamp.timetracker.repository.CategoryRepository;
 import br.com.tiagoamp.timetracker.repository.TimeEntryEntity;
 import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class TimeService {
@@ -37,10 +44,27 @@ public class TimeService {
     }
 
     public void delete(Long userId, Long timeId) {
-        // usar novo metodo no DAO
+        var timeEntity = findTimeEntryEntityIfExists(userId, timeId);
+        timeEntryRepo.delete(timeEntity);
     }
 
     public List<TimeEntry> findByCategory(Long categoryId) {
         return null;
+    }
+
+
+    private TimeEntryEntity findTimeEntryEntityIfExists(Long userId, Long timeId) {
+        userService.findUserById(userId);
+        return timeEntryRepo.findById(timeId)
+            .orElseThrow(() -> new ResourceNotFoundException("Time Entry id: " + timeId));
+    }
+
+    public List<TimeEntry> findTimeEntries(Long userId) {
+        var categories = categoryService.findCategories(userId);
+        return categories.stream()
+                .map(cat -> timeEntryRepo.retrieveByCategory(cat.getId()))
+                .flatMap(l -> l.stream())
+                .map(timeMapper::toModel)
+                .collect(toList());
     }
 }

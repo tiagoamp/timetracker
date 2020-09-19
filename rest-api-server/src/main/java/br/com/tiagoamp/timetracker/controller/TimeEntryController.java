@@ -14,6 +14,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @RequestMapping("user/{userId}/time")
 public class TimeEntryController {
@@ -43,13 +45,21 @@ public class TimeEntryController {
     }
 
     @DeleteMapping("{timeId}")
-    public ResponseEntity removeTimeEntry(@PathVariable("timeId") Long timeId, @PathVariable("userId") Long userId) {
+    public ResponseEntity removeTimeEntry(@PathVariable("userId") Long userId, @PathVariable("timeId") Long timeId) {
+        timeService.delete(userId, timeId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping()
     public ResponseEntity<List<TimeEntryResponseDTO>> getTimeEntriesByUsers(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(new ArrayList<>());
+        var timeEntries = timeService.findTimeEntries(userId);
+        var dtos = timeEntries.stream()
+                .map(timeMapper::toResponseDTO)
+                .map(dto -> {
+                    dto.setUserId(userId);
+                    return dto;
+                }).collect(toList());
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("{timeId}")

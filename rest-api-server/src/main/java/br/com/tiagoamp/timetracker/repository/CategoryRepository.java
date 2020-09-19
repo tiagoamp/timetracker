@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CategoryRepository extends JpaRepository<CategoryEntity,Integer> {
+public interface CategoryRepository extends JpaRepository<CategoryEntity,Long> {
 
     @Query("SELECT c FROM CategoryEntity c WHERE c.user.id = :userId")
     List<CategoryEntity> retrieveByUser(@Param("userId") Long userId);

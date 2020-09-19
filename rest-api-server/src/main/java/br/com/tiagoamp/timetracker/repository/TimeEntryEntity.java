@@ -17,7 +17,7 @@ public class TimeEntryEntity {
 
     private String annotations;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private CategoryEntity categoryEntity;
 
 

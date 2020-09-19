@@ -59,7 +59,8 @@ public class CategorySteps extends GlobalSteps {
         Long userId = objectMapper.readTree(userJson).get("id").asLong();
         Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
         response = given().contentType("application/json").body(categoryJson)
-                .when().put("/user/{userId}/category/{categoryId}",userId, categoryId).then();
+                .when().put("/user/{userId}/category/{categoryId}",userId, categoryId)
+                .then();
     }
 
     @When("^send a Delete request for Category$")

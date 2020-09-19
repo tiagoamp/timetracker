@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite failures="10" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="11" time="6.675136">
-    <testcase classname="TimeEntry Resource" name="Create Time entry" time="4.762781">
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="11" time="5.792886">
+    <testcase classname="Category Resource" name="Create Category for User" time="3.557177">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+And new valid category info.................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And Post a request for new category.........................................passed
+Then should return Created..................................................passed
+And should have id and links info...........................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Category Resource" name="Update Category for User" time="0.434326">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+And new valid category info.................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And Post a request for new category.........................................passed
+And retrieve category id....................................................passed
+And update category info....................................................passed
+And send a Put request for Category.........................................passed
+Then should return OK.......................................................passed
+And should have id and links info...........................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Category Resource" name="Delete Category for User" time="0.275526">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+And new valid category info.................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And Post a request for new category.........................................passed
+And retrieve category id....................................................passed
+And send a Delete request for Category......................................passed
+Then should return No Content...............................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Category Resource" name="Get Categories of User" time="0.213156">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+And new valid category info.................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And Post a request for new category.........................................passed
+And retrieve category id....................................................passed
+And send a Get Categories request...........................................passed
+Then should return OK.......................................................passed
+And should have an array of results.........................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Category Resource" name="Get Categories of User 2" time="0.275928">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+And new valid category info.................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And Post a request for new category.........................................passed
+And retrieve category id....................................................passed
+And send a Get Category by id request.......................................passed
+Then should return OK.......................................................passed
+And should have id and links info...........................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="TimeEntry Resource" name="Create Time entry" time="0.264752">
         <system-out>
             <![CDATA[Given new valid user info...................................................passed
 And new valid category info.................................................passed
@@ -15,890 +83,57 @@ And should have id and links info...........................................pass
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Create User" time="0.433799">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-When Post a request.........................................................skipped
-Then should return Created..................................................skipped
-And should have id and links info...........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:59)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
+    <testcase classname="User Resource" name="Create User" time="0.190191">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+When Post a request.........................................................passed
+Then should return Created..................................................passed
+And should have id and links info...........................................passed
 ]]>
-        </failure>
+        </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Update User" time="0.268927">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And update user info........................................................skipped
-And send a Put request......................................................skipped
-Then should return OK.......................................................skipped
-And should update user......................................................skipped
-And should have id and links info...........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
+    <testcase classname="User Resource" name="Update User" time="0.213828">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And update user info........................................................passed
+And send a Put request......................................................passed
+Then should return OK.......................................................passed
+And should update user......................................................passed
+And should have id and links info...........................................passed
 ]]>
-        </failure>
+        </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Delete User" time="0.224662">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And send a Delete request...................................................skipped
-Then should return No Content...............................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
+    <testcase classname="User Resource" name="Delete User" time="0.143476">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And send a Delete request...................................................passed
+Then should return No Content...............................................passed
 ]]>
-        </failure>
+        </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Get All Users" time="0.140452">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-When Post a request.........................................................skipped
-And send a Get request......................................................skipped
-Then should return OK.......................................................skipped
-And should have an array of results.........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
+    <testcase classname="User Resource" name="Get All Users" time="0.076943">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+When Post a request.........................................................passed
+And send a Get request......................................................passed
+Then should return OK.......................................................passed
+And should have an array of results.........................................passed
 ]]>
-        </failure>
+        </system-out>
     </testcase>
-    <testcase classname="User Resource" name="Get User by id" time="0.145856">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And send a Get by id request................................................skipped
-Then should return OK.......................................................skipped
-And should have id and links info...........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
+    <testcase classname="User Resource" name="Get User by id" time="0.147583">
+        <system-out>
+            <![CDATA[Given new valid user info...................................................passed
+When Post a request.........................................................passed
+And retrieve user id........................................................passed
+And send a Get by id request................................................passed
+Then should return OK.......................................................passed
+And should have id and links info...........................................passed
 ]]>
-        </failure>
-    </testcase>
-    <testcase classname="User Resource" name="Create Category for User" time="0.154445">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-And new valid category info.................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And Post a request for new category.........................................skipped
-Then should return Created..................................................skipped
-And should have id and links info...........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
-]]>
-        </failure>
-    </testcase>
-    <testcase classname="User Resource" name="Update Category for User" time="0.171287">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-And new valid category info.................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And Post a request for new category.........................................skipped
-And retrieve category id....................................................skipped
-And update category info....................................................skipped
-And send a Put request for Category.........................................skipped
-Then should return OK.......................................................skipped
-And should have id and links info...........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
-]]>
-        </failure>
-    </testcase>
-    <testcase classname="User Resource" name="Delete Category for User" time="0.123869">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at jdk.internal.reflect.GeneratedMethodAccessor139.invoke(Unknown Source)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-And new valid category info.................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And Post a request for new category.........................................skipped
-And retrieve category id....................................................skipped
-And send a Delete request for Category......................................skipped
-Then should return No Content...............................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at jdk.internal.reflect.GeneratedMethodAccessor139.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
-]]>
-        </failure>
-    </testcase>
-    <testcase classname="User Resource" name="Get Categories of User" time="0.120751">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.GeneratedConstructorAccessor62.newInstance(Unknown Source)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at jdk.internal.reflect.GeneratedMethodAccessor139.invoke(Unknown Source)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at jdk.internal.reflect.GeneratedMethodAccessor146.invoke(Unknown Source)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-And new valid category info.................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And Post a request for new category.........................................skipped
-And retrieve category id....................................................skipped
-And send a Get Categories request...........................................skipped
-Then should return OK.......................................................skipped
-And should have an array of results.........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.GeneratedConstructorAccessor62.newInstance(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at jdk.internal.reflect.GeneratedMethodAccessor139.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at jdk.internal.reflect.GeneratedMethodAccessor146.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
-]]>
-        </failure>
-    </testcase>
-    <testcase classname="User Resource" name="Get Categories of User 2" time="0.128307">
-        <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;204&gt; but was &lt;400&gt;.&#10;&#10;&#9;at java.base/jdk.internal.reflect.GeneratedConstructorAccessor62.newInstance(Unknown Source)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)&#10;&#9;at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)&#10;&#9;at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#10;&#9;at jdk.internal.reflect.GeneratedMethodAccessor139.invoke(Unknown Source)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)&#10;&#9;at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)&#10;&#9;at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)&#10;&#9;at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)&#10;&#9;at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)&#10;&#9;at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at jdk.internal.reflect.GeneratedMethodAccessor146.invoke(Unknown Source)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)&#10;&#9;at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#10;&#9;at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)&#10;&#9;at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)&#10;&#9;at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)&#10;&#9;at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:32)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:26)&#10;&#9;at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)&#10;&#9;at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)&#10;&#9;at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)&#10;&#9;at cucumber.api.TestStep.run(TestStep.java:83)&#10;&#9;at cucumber.api.TestCase.run(TestCase.java:58)&#10;&#9;at cucumber.runner.Runner.runPickle(Runner.java:80)&#10;&#9;at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)&#10;&#9;at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)&#10;&#9;at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#10;&#9;at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#10;&#9;at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#10;&#9;at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#10;&#9;at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)&#10;&#9;at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)&#10;&#9;at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)&#10;">
-            <![CDATA[Given new valid user info...................................................skipped
-And new valid category info.................................................skipped
-When Post a request.........................................................skipped
-And retrieve user id........................................................skipped
-And Post a request for new category.........................................skipped
-And retrieve category id....................................................skipped
-And send a Get Category by id request.......................................skipped
-Then should return OK.......................................................skipped
-And should have id and links info...........................................skipped
-
-StackTrace:
-java.lang.AssertionError: 1 expectation failed.
-Expected status code <204> but was <400>.
-
-	at java.base/jdk.internal.reflect.GeneratedConstructorAccessor62.newInstance(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
-	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
-	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:493)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at jdk.internal.reflect.GeneratedMethodAccessor139.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at jdk.internal.reflect.GeneratedMethodAccessor146.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at timetracker.TimeSteps.cleanDataBase(TimeSteps.java:55)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at cucumber.runtime.Utils$1.call(Utils.java:32)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:26)
-	at cucumber.runtime.java.JavaHookDefinition.execute(JavaHookDefinition.java:60)
-	at cucumber.runtime.HookDefinitionMatch.runStep(HookDefinitionMatch.java:17)
-	at cucumber.runner.UnskipableStep.executeStep(UnskipableStep.java:22)
-	at cucumber.api.TestStep.run(TestStep.java:83)
-	at cucumber.api.TestCase.run(TestCase.java:58)
-	at cucumber.runner.Runner.runPickle(Runner.java:80)
-	at cucumber.runtime.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:140)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:68)
-	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:23)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:73)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:117)
-	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:55)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at cucumber.api.junit.Cucumber$1.evaluate(Cucumber.java:126)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:220)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:53)
-]]>
-        </failure>
+        </system-out>
     </testcase>
 </testsuite>

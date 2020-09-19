@@ -8,6 +8,8 @@ import br.com.tiagoamp.timetracker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TimeService {
 
@@ -25,8 +27,7 @@ public class TimeService {
     }
 
 
-    public TimeEntry create(TimeEntry timeEntry) {
-        Long userId = timeEntry.getUser().getId();
+    public TimeEntry create(Long userId, TimeEntry timeEntry) {
         userRepo.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User id: " + userId));
         categoryRepo.retrieveByUser(userId).stream()
@@ -41,4 +42,7 @@ public class TimeService {
         // usar novo metodo no DAO
     }
 
+    public List<TimeEntry> findByCategory(Long categoryId) {
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package br.com.tiagoamp.timetracker.dto;
 
+import br.com.tiagoamp.timetracker.controller.CategoryController;
 import br.com.tiagoamp.timetracker.controller.TimeEntryController;
 import br.com.tiagoamp.timetracker.controller.UserController;
 import br.com.tiagoamp.timetracker.model.Category;
@@ -37,10 +38,7 @@ public class TimeEntryResponseDTO extends RepresentationModel<TimeEntryResponseD
         return id;
     }
     public void setId(Long id) {
-        if (id == null) return;
         this.id = id;
-        this.add(linkTo(methodOn(TimeEntryController.class).getTimeEntryById(id)).withSelfRel());
-        this.add(linkTo(methodOn(TimeEntryController.class).getTimeEntriesByUsers(userId)).withRel("user-time-entries"));
     }
     public LocalDateTime getStartTime() {
         return startTime;
@@ -81,7 +79,9 @@ public class TimeEntryResponseDTO extends RepresentationModel<TimeEntryResponseD
         return userId;
     }
     public void setUserId(Long userId) {
+        if (userId == null) return;
         this.userId = userId;
+        this.add(linkTo(methodOn(TimeEntryController.class).getTimeEntryById(userId, id)).withSelfRel());
     }
 
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("time")
+@RequestMapping("user/{userId}/time")
 public class TimeEntryController {
 
     private TimeService timeService;
@@ -29,10 +29,11 @@ public class TimeEntryController {
 
 
     @PostMapping
-    public ResponseEntity<?> createTimeEntry(@Valid @RequestBody TimeEntryRequestDTO timeEntryReqDTO) {
+    public ResponseEntity<?> createTimeEntry(@PathVariable("userId") Long userId, @Valid @RequestBody TimeEntryRequestDTO timeEntryReqDTO) {
         var timeEntry = timeMapper.toModel(timeEntryReqDTO);
-        timeEntry = timeService.create(timeEntry);
+        timeEntry = timeService.create(userId, timeEntry);
         var timeDTO = timeMapper.toResponseDTO(timeEntry);
+        timeDTO.setUserId(userId);
         return ResponseEntity.created(URI.create(timeDTO.getId().toString())).body(timeDTO);
     }
 
@@ -52,7 +53,7 @@ public class TimeEntryController {
     }
 
     @GetMapping("{timeId}")
-    public ResponseEntity<?> getTimeEntryById(@PathVariable("timeId") Long timeId) {
+    public ResponseEntity<?> getTimeEntryById(@PathVariable("userId") Long userId, @PathVariable("timeId") Long timeId) {
         return ResponseEntity.ok(new TimeEntryResponseDTO());
     }
 

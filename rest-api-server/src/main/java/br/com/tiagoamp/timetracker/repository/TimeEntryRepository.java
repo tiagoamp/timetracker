@@ -11,7 +11,4 @@ public interface TimeEntryRepository extends PagingAndSortingRepository<TimeEntr
     @Query("SELECT t FROM TimeEntryEntity t WHERE t.categoryEntity.id = :categoryId")
     List<TimeEntryEntity> retrieveByCategory(@Param("categoryId") Long categoryId);
 
-    @Query("SELECT t FROM TimeEntryEntity t WHERE t.userEntity.id = :userId AND t.id = :timeId")
-    List<TimeEntryEntity> retrieveByUserAndId(@Param("userId") Long userId, @Param("timeId") Long timeId);
-
 }

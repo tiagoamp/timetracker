@@ -7,6 +7,7 @@ import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.repository.CategoryEntity;
 import br.com.tiagoamp.timetracker.repository.CategoryRepository;
+import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +20,15 @@ public class CategoryService {
 
     private CategoryRepository categoryRepo;
     private UserService userService;
-    private TimeService timeService;
+    private TimeEntryRepository timeRepo;
     private CategoryMapper categoryMapper;
 
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepo, UserService userService, TimeService timeService, CategoryMapper categoryMapper) {
+    public CategoryService(CategoryRepository categoryRepo, UserService userService, TimeEntryRepository timeRepo, CategoryMapper categoryMapper) {
         this.categoryRepo = categoryRepo;
         this.userService = userService;
-        this.timeService = timeService;
+        this.timeRepo = timeRepo;
         this.categoryMapper = categoryMapper;
     }
 
@@ -54,7 +55,7 @@ public class CategoryService {
 
     public void delete(Long userId, Long categoryId) {
         var categoryEntity = findCategoryEntityIfExists(userId, categoryId);
-        var isCategoryUsedInTimeEntries = !timeService.findByCategory(categoryId).isEmpty();
+        var isCategoryUsedInTimeEntries = !timeRepo.retrieveByCategory(categoryId).isEmpty();
         if (isCategoryUsedInTimeEntries)
             throw new TimeTrackerOperationException("Category is associated to existing time entry and cannot be deleted");
         categoryRepo.delete(categoryEntity);

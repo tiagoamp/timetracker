@@ -5,10 +5,11 @@ import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.model.Category;
-import br.com.tiagoamp.timetracker.model.TimeEntry;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.repository.CategoryEntity;
 import br.com.tiagoamp.timetracker.repository.CategoryRepository;
+import br.com.tiagoamp.timetracker.repository.TimeEntryEntity;
+import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,9 +31,9 @@ class CategoryServiceTest {
     @Mock
     private CategoryRepository categoryRepo;
     @Mock
-    private UserService userService;
+    private TimeEntryRepository timeRepo;
     @Mock
-    private TimeService timeService;
+    private UserService userService;
 
     @Spy  // injects this specific instance to target class
     private CategoryMapper catMapper = Mappers.getMapper(CategoryMapper.class);
@@ -118,7 +119,7 @@ class CategoryServiceTest {
         var categoryEntity = new CategoryEntity(10L, "name", "desc", null);
         Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(new User());
         Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(Arrays.asList(categoryEntity));
-        Mockito.when(timeService.findByCategory(Mockito.anyLong())).thenReturn(Arrays.asList(new TimeEntry()));
+        Mockito.when(timeRepo.retrieveByCategory(Mockito.anyLong())).thenReturn(Arrays.asList(new TimeEntryEntity()));
         assertThrows(TimeTrackerOperationException.class, () -> service.delete(1L, 10L));
     }
 
@@ -128,7 +129,7 @@ class CategoryServiceTest {
         var categoryEntity = new CategoryEntity(10L, "name", "desc", null);
         Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(new User());
         Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(Arrays.asList(categoryEntity));
-        Mockito.when(timeService.findByCategory(Mockito.anyLong())).thenReturn(new ArrayList<>());
+        Mockito.when(timeRepo.retrieveByCategory(Mockito.anyLong())).thenReturn(new ArrayList<>());
         service.delete(1L, 10L);
     }
 

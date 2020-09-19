@@ -5,6 +5,7 @@ import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.User;
+import br.com.tiagoamp.timetracker.repository.CategoryRepository;
 import br.com.tiagoamp.timetracker.repository.UserEntity;
 import br.com.tiagoamp.timetracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ import static java.util.stream.Collectors.toList;
 public class UserService {
 
     private UserRepository userRepo;
-    private CategoryService categoryService;
+    private CategoryRepository categoryRepo;
     private UserMapper userMapper;
 
 
     @Autowired
-    public UserService(UserRepository userRepo, CategoryService categoryService, UserMapper userMapper) {
+    public UserService(UserRepository userRepo, CategoryRepository categoryRepo, UserMapper userMapper) {
         this.userRepo = userRepo;
-        this.categoryService = categoryService;
+        this.categoryRepo = categoryRepo;
         this.userMapper = userMapper;
     }
 
@@ -45,7 +46,7 @@ public class UserService {
 
     public void delete(Long userId) {
         var userEntity = findUserEntityIfExists(userId);
-        var userHasCategories = !categoryService.findCategories(userId).isEmpty();
+        var userHasCategories = !categoryRepo.retrieveByUser(userId).isEmpty();
         if (userHasCategories)
             throw new TimeTrackerOperationException("User has Categories registered and cannot be deleted");
         userRepo.delete(userEntity);

@@ -1,10 +1,11 @@
 package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
-import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.TimeEntryMapper;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
-import br.com.tiagoamp.timetracker.repository.*;
+import br.com.tiagoamp.timetracker.repository.CategoryRepository;
+import br.com.tiagoamp.timetracker.repository.TimeEntryEntity;
+import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,25 +15,22 @@ import java.util.List;
 public class TimeService {
 
     private TimeEntryRepository timeEntryRepo;
-    private UserRepository userRepo;
-    private CategoryRepository categoryRepo;
+    private UserService userService;
+    private CategoryService categoryService;
     private TimeEntryMapper timeMapper;
 
     @Autowired
-    public TimeService(TimeEntryRepository timeEntryRepo, UserRepository userRepo, CategoryRepository categoryRepo, TimeEntryMapper timeMapper) {
+    public TimeService(TimeEntryRepository timeEntryRepo, UserService userService, CategoryService categoryService, TimeEntryMapper timeMapper) {
         this.timeEntryRepo = timeEntryRepo;
-        this.userRepo = userRepo;
-        this.categoryRepo = categoryRepo;
+        this.userService = userService;
+        this.categoryService = categoryService;
         this.timeMapper = timeMapper;
     }
 
 
     public TimeEntry create(Long userId, TimeEntry timeEntry) {
-        userRepo.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User id: " + userId));
-        categoryRepo.retrieveByUser(userId).stream()
-                .filter(cat -> cat.getId().longValue() == timeEntry.getCategory().getId().longValue())
-                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Category id: " + timeEntry.getCategory().getId()));
+        userService.findUserById(userId);
+        categoryService.findCategories(userId);
         TimeEntryEntity timeEntryEntity = timeMapper.toEntity(timeEntry);
         timeEntryEntity = timeEntryRepo.save(timeEntryEntity);
         return timeMapper.toModel(timeEntryEntity);

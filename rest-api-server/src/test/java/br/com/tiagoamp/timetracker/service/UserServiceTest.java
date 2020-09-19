@@ -6,6 +6,8 @@ import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.User;
+import br.com.tiagoamp.timetracker.repository.CategoryEntity;
+import br.com.tiagoamp.timetracker.repository.CategoryRepository;
 import br.com.tiagoamp.timetracker.repository.UserEntity;
 import br.com.tiagoamp.timetracker.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +32,7 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepo;
     @Mock
-    private CategoryService categoryService;
+    private CategoryRepository categoryRepo;
 
     @Spy  // injects this specific instance to target class
     private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
@@ -94,7 +96,7 @@ class UserServiceTest {
     @DisplayName("When user has categories registered should throw exception")
     void delete_shouldThrowError2() {
         Mockito.when(userRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(new UserEntity()));
-        Mockito.when(categoryService.findCategories(Mockito.anyLong())).thenReturn(Arrays.asList(new Category()));
+        Mockito.when(categoryRepo.retrieveByUser(Mockito.anyLong())).thenReturn(Arrays.asList(new CategoryEntity()));
         assertThrows(TimeTrackerOperationException.class, () -> service.delete(1L));
     }
 

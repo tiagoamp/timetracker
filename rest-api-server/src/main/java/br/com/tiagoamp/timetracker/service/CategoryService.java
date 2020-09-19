@@ -5,6 +5,7 @@ import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.model.Category;
+import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.repository.CategoryEntity;
 import br.com.tiagoamp.timetracker.repository.CategoryRepository;
 import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
@@ -47,8 +48,9 @@ public class CategoryService {
     }
 
     public Category update(Long userId, Category category) {
-        findCategoryEntityIfExists(userId, category.getId());
+        var entityFromDB = findCategoryEntityIfExists(userId, category.getId());
         var categoryEntity = categoryMapper.toEntity(category);
+        categoryEntity.setUser(entityFromDB.getUser());
         categoryEntity = categoryRepo.save(categoryEntity);
         return categoryMapper.toModel(categoryEntity);
     }
@@ -73,10 +75,13 @@ public class CategoryService {
 
     private CategoryEntity findCategoryEntityIfExists(Long userId, Long categoryId) {
         userService.findUserById(userId);
-        return categoryRepo.retrieveByUser(userId).stream()
-                .filter(cat -> cat.getId().longValue() == categoryId.longValue())
-                .findFirst()
+        boolean isCategoryOfThisUser = categoryRepo.retrieveByUser(userId).stream()
+            .anyMatch(cat -> cat.getId().longValue() == categoryId.longValue());
+        if (!isCategoryOfThisUser)
+            throw new ResourceNotFoundException("Category id: " + categoryId);
+        var categoryEntity = categoryRepo.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category id: " + categoryId));
+        return categoryEntity;
     }
 
 }

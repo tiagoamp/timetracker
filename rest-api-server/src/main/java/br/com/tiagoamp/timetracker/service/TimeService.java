@@ -43,6 +43,14 @@ public class TimeService {
         return timeMapper.toModel(timeEntryEntity);
     }
 
+    public TimeEntry update(Long userId, TimeEntry timeEntry) {
+        var entityFromDB = findTimeEntryEntityIfExists(userId, timeEntry.getId());
+        TimeEntryEntity timeEntryEntity = timeMapper.toEntity(timeEntry);
+        timeEntryEntity.setCategoryEntity(entityFromDB.getCategoryEntity());
+        timeEntryEntity = timeEntryRepo.save(timeEntryEntity);
+        return timeMapper.toModel(timeEntryEntity);
+    }
+
     public void delete(Long userId, Long timeId) {
         var timeEntity = findTimeEntryEntityIfExists(userId, timeId);
         timeEntryRepo.delete(timeEntity);

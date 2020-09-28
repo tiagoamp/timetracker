@@ -1,7 +1,9 @@
 package br.com.tiagoamp.timetracker.controller;
 
+import br.com.tiagoamp.timetracker.dto.CategoryRequestDTO;
 import br.com.tiagoamp.timetracker.dto.TimeEntryRequestDTO;
 import br.com.tiagoamp.timetracker.mapper.*;
+import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
 import br.com.tiagoamp.timetracker.service.CategoryService;
 import br.com.tiagoamp.timetracker.service.TimeService;
@@ -67,9 +69,10 @@ class TimeEntryControllerTest {
     @Test
     @DisplayName("When Post request with valid time entry Should result correct response")
     public void whenPostRequestToUsers_correctResponse() throws Exception {
-        TimeEntryRequestDTO timeReq = new TimeEntryRequestDTO(10L, LocalDateTime.now(), null, null);
+        TimeEntryRequestDTO timeReq = new TimeEntryRequestDTO(10L, LocalDateTime.now(), LocalDateTime.now(), null);
         String timeJson = toJson(timeReq);
         TimeEntry entry = timeMapper.toModel(timeReq);
+        entry.setCategory(new Category(10L, "cat name", "cat desc"));
         entry.setId(100L);
         Mockito.when(timeService.create(Mockito.anyLong(), Mockito.any(TimeEntry.class))).thenReturn(entry);
         mockMvc.perform(MockMvcRequestBuilders
@@ -78,8 +81,32 @@ class TimeEntryControllerTest {
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id").exists())
             .andExpect(jsonPath("$.userId").exists())
+            .andExpect(jsonPath("$._links", is(not(emptyArray()))))
             .andExpect(jsonPath("$.categoryId").exists())
-            .andExpect(jsonPath("$._links", is(not(emptyArray()))));
+            .andExpect(jsonPath("$.categoryName").exists())
+            .andExpect(jsonPath("$.durationInMinutes").exists());
+    }
+
+    @Test
+    @DisplayName("When Put request with valid time entry Should result correct response")
+    public void whenPutRequestToTimeEntry_correctResponse() throws Exception {
+        TimeEntryRequestDTO entryReq = new TimeEntryRequestDTO(10L, LocalDateTime.now(), LocalDateTime.now(), "ann");
+        String timeJson = toJson(entryReq);
+        TimeEntry timeEntry = timeMapper.toModel(entryReq);
+        timeEntry.setCategory(new Category(10L, "cat name", "cat desc"));
+        timeEntry.setId(100L);
+        final Long userId = 1L;
+        Mockito.when(timeService.update(Mockito.anyLong(), Mockito.any(TimeEntry.class))).thenReturn(timeEntry);
+        mockMvc.perform(MockMvcRequestBuilders
+                .put("/user/{userId}/time/{timeId}", userId, timeEntry.getId())
+                .content(timeJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.userId").exists())
+                .andExpect(jsonPath("$._links", is(not(emptyArray()))))
+                .andExpect(jsonPath("$.categoryId").exists())
+                .andExpect(jsonPath("$.categoryName").exists())
+                .andExpect(jsonPath("$.durationInMinutes").exists());
     }
 
 }

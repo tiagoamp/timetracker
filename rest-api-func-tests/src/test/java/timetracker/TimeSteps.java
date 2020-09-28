@@ -48,4 +48,31 @@ public class TimeSteps extends GlobalSteps {
                 .when().post("user/{userId}/time", userId).then();
     }
 
+    @When("^retrieve time entry id$")
+    public void retrieve_time_entry_id() throws Exception {
+        Integer id = response.extract().body().jsonPath().get("id");
+        JsonNode jsonNode = objectMapper.readTree(entryJson);
+        entryJson = ((ObjectNode) jsonNode).put("id", id).toString();
+    }
+
+    @When("^update time entry info$")
+    public void update_time_entry_info() throws Exception {
+        JsonNode jsonNode = objectMapper.readTree(entryJson);
+        entryJson = ((ObjectNode) jsonNode).put("annotations", "Altered Annotation").toString();
+    }
+
+    @When("^send a Put request for Time entry$")
+    public void send_a_Put_request_for_Time_entry() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        Long timeId = objectMapper.readTree(entryJson).get("id").asLong();
+        response = given().contentType("application/json").body(entryJson)
+                .when().put("/user/{userId}/time/{timeId}",userId, timeId)
+                .then();
+    }
+
+    @Then("^should have category info in time entry$")
+    public void should_have_category_info_in_time_entry() throws Exception {
+        response.body("categoryId", notNullValue()).body("categoryName", notNullValue());
+    }
+
 }

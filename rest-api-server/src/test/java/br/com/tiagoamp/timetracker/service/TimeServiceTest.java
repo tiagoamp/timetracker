@@ -84,4 +84,39 @@ class TimeServiceTest {
         assertNotNull(result.getCategory().getId());
     }
 
+    @Test
+    @DisplayName("When user does not exist for update should throw exception")
+    void updateTimeEntry_shouldThrowError1() {
+        var timeEntry = new TimeEntry(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", null);
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenThrow(ResourceNotFoundException.class);
+        assertThrows(ResourceNotFoundException.class, () -> service.update(1L, timeEntry));
+    }
+
+    @Test
+    @DisplayName("When time entry does not exist for update should throw exception")
+    void updateTimeEntry_shouldThrowError2() {
+        var userId = 1L;
+        var timeEntry = new TimeEntry(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", null);
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(new User());
+        Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        assertThrows(ResourceNotFoundException.class, () -> service.update(userId, timeEntry));
+    }
+
+    @Test
+    @DisplayName("When time entry exists should update info")
+    void update_shouldUpdateCategory() throws ResourceNotFoundException {
+        // given
+        var userId = 1L;
+        var timeEntry = new TimeEntry(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", null);
+        var entity = timeMapper.toEntity(timeEntry);
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(new User());
+        Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(entity));
+        Mockito.when(timeEntryRepo.save(Mockito.any(TimeEntryEntity.class))).thenReturn(entity);
+        // when
+        var result = service.update(userId, timeEntry);
+        // then
+        assertNotNull(result.getId());
+    }
+
+
 }

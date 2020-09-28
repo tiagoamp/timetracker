@@ -1,13 +1,11 @@
 package br.com.tiagoamp.timetracker.dto;
 
-import br.com.tiagoamp.timetracker.controller.CategoryController;
 import br.com.tiagoamp.timetracker.controller.TimeEntryController;
-import br.com.tiagoamp.timetracker.controller.UserController;
-import br.com.tiagoamp.timetracker.model.Category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.RepresentationModel;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -34,6 +32,12 @@ public class TimeEntryResponseDTO extends RepresentationModel<TimeEntryResponseD
     private String annotations;
 
 
+    private void calculateDuration() {
+        if (startTime == null || endTime == null) return;
+        this.durationInMinutes = (int) Duration.between(startTime, endTime).toMinutes();
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -45,12 +49,14 @@ public class TimeEntryResponseDTO extends RepresentationModel<TimeEntryResponseD
     }
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+        calculateDuration();
     }
     public LocalDateTime getEndTime() {
         return endTime;
     }
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+        calculateDuration();
     }
     public String getCategoryName() {
         return categoryName;

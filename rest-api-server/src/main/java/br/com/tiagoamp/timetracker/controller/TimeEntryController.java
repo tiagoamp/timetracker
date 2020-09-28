@@ -8,10 +8,10 @@ import br.com.tiagoamp.timetracker.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -40,8 +40,13 @@ public class TimeEntryController {
     }
 
     @PutMapping("{timeId}")
-    public ResponseEntity<?> updateTimeEntry(@PathVariable("timeId") String timeId, @RequestBody TimeEntry timeEntryReqDTO) {
-        return ResponseEntity.ok(new TimeEntryResponseDTO());
+    public ResponseEntity<?> updateTimeEntry(@PathVariable("userId") Long userId, @PathVariable("timeId") Long timeId, @RequestBody TimeEntryRequestDTO timeEntryReqDTO) {
+        var timeEntry = timeMapper.toModel(timeEntryReqDTO);
+        timeEntry.setId(timeId);
+        timeEntry = timeService.update(userId, timeEntry);
+        var timeEntryRespDTO = timeMapper.toResponseDTO(timeEntry);
+        timeEntryRespDTO.setUserId(userId);
+        return ResponseEntity.ok(timeEntryRespDTO);
     }
 
     @DeleteMapping("{timeId}")

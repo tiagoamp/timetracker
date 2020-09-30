@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TimeEntryRepository extends JpaRepository<TimeEntryEntity,Long> {
 
-    @Query("SELECT t FROM TimeEntryEntity t WHERE t.categoryEntity.id = :categoryId")
+    @Query("SELECT t FROM TimeEntryEntity t WHERE t.category.id = :categoryId")
     List<TimeEntryEntity> retrieveByCategory(@Param("categoryId") Long categoryId);
 
 }

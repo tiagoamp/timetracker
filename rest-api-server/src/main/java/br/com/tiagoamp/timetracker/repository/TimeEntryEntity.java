@@ -18,7 +18,7 @@ public class TimeEntryEntity {
     private String annotations;
 
     @OneToOne
-    private CategoryEntity categoryEntity;
+    private CategoryEntity category;
 
 
     public TimeEntryEntity() { }
@@ -28,7 +28,7 @@ public class TimeEntryEntity {
         this.startTime = startTime;
         this.endTime = endTime;
         this.annotations = annotations;
-        this.categoryEntity = categoryEntity;
+        this.category = categoryEntity;
     }
 
 
@@ -50,11 +50,11 @@ public class TimeEntryEntity {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-    public CategoryEntity getCategoryEntity() {
-        return categoryEntity;
+    public CategoryEntity getCategory() {
+        return category;
     }
     public void setCategoryEntity(CategoryEntity categoryEntity) {
-        this.categoryEntity = categoryEntity;
+        this.category = categoryEntity;
     }
     public String getAnnotations() {
         return annotations;

@@ -13,7 +13,7 @@ public interface TimeEntryMapper {
     @Mapping(source="categoryId", target="category.id")
     TimeEntry toModel(TimeEntryRequestDTO reqDTO);
 
-    @Mapping(source="categoryEntity.id", target="category.id")
+    @Mapping(source="category.id", target="category.id")
     TimeEntry toModel(TimeEntryEntity entity);
 
     @Mapping(source="category.id", target="categoryEntity.id")

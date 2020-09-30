@@ -75,11 +75,9 @@ public class CategoryService {
 
     private CategoryEntity findCategoryEntityIfExists(Long userId, Long categoryId) {
         userService.findUserById(userId);
-        boolean isCategoryOfThisUser = categoryRepo.retrieveByUser(userId).stream()
-            .anyMatch(cat -> cat.getId().longValue() == categoryId.longValue());
-        if (!isCategoryOfThisUser)
-            throw new ResourceNotFoundException("Category id: " + categoryId);
-        var categoryEntity = categoryRepo.findById(categoryId)
+        var categoryEntity = categoryRepo.retrieveByUser(userId).stream()
+                .filter(cat -> cat.getId().longValue() == categoryId.longValue())
+                .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Category id: " + categoryId));
         return categoryEntity;
     }

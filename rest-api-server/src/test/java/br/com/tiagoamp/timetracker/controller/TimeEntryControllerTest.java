@@ -109,4 +109,13 @@ class TimeEntryControllerTest {
                 .andExpect(jsonPath("$.durationInMinutes").exists());
     }
 
+    @Test
+    @DisplayName("When Delete time entry request of existing id Should delete entry")
+    public void whenDelRequestToTimeEntry_correctResponse() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/user/{userId}/time/{timeId}", 1L, 100L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
 }

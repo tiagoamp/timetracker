@@ -40,7 +40,7 @@ public class TimeService {
     public TimeEntry update(Long userId, TimeEntry timeEntry) {
         var entityFromDB = findTimeEntryEntityIfExists(userId, timeEntry.getId());
         TimeEntryEntity timeEntryEntity = timeMapper.toEntity(timeEntry);
-        timeEntryEntity.setCategoryEntity(entityFromDB.getCategoryEntity());
+        timeEntryEntity.setCategoryEntity(entityFromDB.getCategory());
         timeEntryEntity = timeEntryRepo.save(timeEntryEntity);
         return timeMapper.toModel(timeEntryEntity);
     }
@@ -57,8 +57,11 @@ public class TimeService {
 
     private TimeEntryEntity findTimeEntryEntityIfExists(Long userId, Long timeId) {
         userService.findUserById(userId);
-        return timeEntryRepo.findById(timeId)
-            .orElseThrow(() -> new ResourceNotFoundException("Time Entry id: " + timeId));
+        var timeEntity = timeEntryRepo.findById(timeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Time entry id: " + timeId));
+        boolean isEntryOfThisUser = timeEntity.getCategory().getUser().getId().longValue() == userId;
+        if (!isEntryOfThisUser) throw new ResourceNotFoundException("Time entry id: " + timeId);
+        return timeEntity;
     }
 
     public List<TimeEntry> findTimeEntries(Long userId) {

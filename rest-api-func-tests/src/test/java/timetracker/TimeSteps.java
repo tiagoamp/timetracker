@@ -70,6 +70,14 @@ public class TimeSteps extends GlobalSteps {
                 .then();
     }
 
+    @When("^send a Delete request for Time Entry$")
+    public void send_a_Delete_request_for_Time_Entry() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        Long timeId = objectMapper.readTree(entryJson).get("id").asLong();
+        response = given()
+                .when().delete("/user/{userId}/time/{timeId}",userId, timeId).then();
+    }
+
     @Then("^should have category info in time entry$")
     public void should_have_category_info_in_time_entry() throws Exception {
         response.body("categoryId", notNullValue()).body("categoryName", notNullValue());

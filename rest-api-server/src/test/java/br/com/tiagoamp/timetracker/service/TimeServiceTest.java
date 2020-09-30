@@ -1,15 +1,15 @@
 package br.com.tiagoamp.timetracker.service;
 
-import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
-import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
-import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.TimeEntryMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
 import br.com.tiagoamp.timetracker.model.User;
-import br.com.tiagoamp.timetracker.repository.*;
+import br.com.tiagoamp.timetracker.repository.CategoryEntity;
+import br.com.tiagoamp.timetracker.repository.TimeEntryEntity;
+import br.com.tiagoamp.timetracker.repository.TimeEntryRepository;
+import br.com.tiagoamp.timetracker.repository.UserEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,11 +21,11 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class TimeServiceTest {
@@ -39,6 +39,8 @@ class TimeServiceTest {
 
     @Spy  // injects this specific instance to target class
     private TimeEntryMapper timeMapper = Mappers.getMapper(TimeEntryMapper.class);
+    @Spy
+    private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     @InjectMocks
     private TimeService service;
@@ -106,17 +108,45 @@ class TimeServiceTest {
     @DisplayName("When time entry exists should update info")
     void update_shouldUpdateCategory() throws ResourceNotFoundException {
         // given
-        var userId = 1L;
-        var timeEntry = new TimeEntry(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", null);
+        var userEntity = new UserEntity(1L, "email@email.com", "name", "password");
+        var user = userMapper.toModel(userEntity);
+        var category = new Category(10L, "cat name", "cat desc");
+        var categoryEntity = new CategoryEntity(10L, "cat name", "cat desc", userEntity);
+        var timeEntry = new TimeEntry(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", category);
         var entity = timeMapper.toEntity(timeEntry);
-        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(new User());
+        entity.setCategoryEntity(categoryEntity);
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(user);
         Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(entity));
         Mockito.when(timeEntryRepo.save(Mockito.any(TimeEntryEntity.class))).thenReturn(entity);
         // when
-        var result = service.update(userId, timeEntry);
+        var result = service.update(user.getId(), timeEntry);
         // then
         assertNotNull(result.getId());
     }
 
+    @Test
+    @DisplayName("When time entry does not belongs to informed user should delete category")
+    void delete_shouldThrowError() {
+        var userEntity = new UserEntity(1L, "email@email.com", "name", "password");
+        var otherUserEntity = new UserEntity(2L, "email@email.com", "name", "password");
+        var user = userMapper.toModel(userEntity);
+        var categoryEntity = new CategoryEntity(10L, "cat name", "cat desc", otherUserEntity);
+        var timeEntity = new TimeEntryEntity(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", categoryEntity);
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(user);
+        Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(timeEntity));
+        assertThrows(ResourceNotFoundException.class, () -> service.delete(user.getId(), timeEntity.getId()));
+    }
+
+    @Test
+    @DisplayName("When time entry exists should delete category")
+    void delete_shouldDeleteTimeEntry() {
+        var userEntity = new UserEntity(1L, "email@email.com", "name", "password");
+        var user = userMapper.toModel(userEntity);
+        var categoryEntity = new CategoryEntity(10L, "cat name", "cat desc", userEntity);
+        var timeEntity = new TimeEntryEntity(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", categoryEntity);
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(user);
+        Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(timeEntity));
+        service.delete(1L, 10L);
+    }
 
 }

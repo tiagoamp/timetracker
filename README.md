@@ -2,4 +2,4 @@
 Simple Time Tracker
 
 
-__License: MIT__
+*License: MIT*

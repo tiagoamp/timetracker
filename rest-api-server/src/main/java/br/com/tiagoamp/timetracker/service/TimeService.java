@@ -50,8 +50,18 @@ public class TimeService {
         timeEntryRepo.delete(timeEntity);
     }
 
-    public List<TimeEntry> findByCategory(Long categoryId) {
-        return null;
+    public List<TimeEntry> findTimeEntriesOfUser(Long userId) {
+        var categories = categoryService.findCategories(userId);
+        return categories.stream()
+                .map(cat -> timeEntryRepo.retrieveByCategory(cat.getId()))
+                .flatMap(l -> l.stream())
+                .map(timeMapper::toModel)
+                .collect(toList());
+    }
+
+    public TimeEntry findTimeEntryById(Long userId, Long timeId) {
+        var timeEntity = findTimeEntryEntityIfExists(userId, timeId);
+        return timeMapper.toModel(timeEntity);
     }
 
 
@@ -64,12 +74,4 @@ public class TimeService {
         return timeEntity;
     }
 
-    public List<TimeEntry> findTimeEntries(Long userId) {
-        var categories = categoryService.findCategories(userId);
-        return categories.stream()
-                .map(cat -> timeEntryRepo.retrieveByCategory(cat.getId()))
-                .flatMap(l -> l.stream())
-                .map(timeMapper::toModel)
-                .collect(toList());
-    }
 }

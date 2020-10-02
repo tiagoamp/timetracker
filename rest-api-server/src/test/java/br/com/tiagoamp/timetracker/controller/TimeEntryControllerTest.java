@@ -1,8 +1,8 @@
 package br.com.tiagoamp.timetracker.controller;
 
-import br.com.tiagoamp.timetracker.dto.CategoryRequestDTO;
 import br.com.tiagoamp.timetracker.dto.TimeEntryRequestDTO;
-import br.com.tiagoamp.timetracker.mapper.*;
+import br.com.tiagoamp.timetracker.mapper.TimeEntryMapper;
+import br.com.tiagoamp.timetracker.mapper.TimeEntryMapperImpl;
 import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
 import br.com.tiagoamp.timetracker.service.CategoryService;
@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import static br.com.tiagoamp.timetracker.util.JsonUtil.toJson;
 import static org.hamcrest.Matchers.*;
@@ -118,4 +119,26 @@ class TimeEntryControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @Test
+    @DisplayName("When Get time entries of user request Should return list")
+    public void whenGetRequestToTimeEntryOfUser_correctResponse() throws Exception {
+        var entries = Arrays.asList(new TimeEntry(), new TimeEntry());
+        Mockito.when(timeService.findTimeEntriesOfUser(Mockito.anyLong())).thenReturn(entries);
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{userId}/time", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", hasSize(entries.size())));
+    }
+
+    @Test
+    @DisplayName("When Get request by id Should result correct response")
+    public void whenGetRequestById_correctResponse() throws Exception {
+        Mockito.when(timeService.findTimeEntryById(Mockito.anyLong(), Mockito.anyLong())).thenReturn(new TimeEntry());
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/user/{userid}/time/{timeId}", 1L, 100L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

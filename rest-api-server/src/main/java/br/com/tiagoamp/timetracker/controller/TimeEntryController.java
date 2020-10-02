@@ -8,7 +8,6 @@ import br.com.tiagoamp.timetracker.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -57,7 +56,7 @@ public class TimeEntryController {
 
     @GetMapping()
     public ResponseEntity<List<TimeEntryResponseDTO>> getTimeEntriesByUsers(@PathVariable("userId") Long userId) {
-        var timeEntries = timeService.findTimeEntries(userId);
+        var timeEntries = timeService.findTimeEntriesOfUser(userId);
         var dtos = timeEntries.stream()
                 .map(timeMapper::toResponseDTO)
                 .map(dto -> {
@@ -68,8 +67,11 @@ public class TimeEntryController {
     }
 
     @GetMapping("{timeId}")
-    public ResponseEntity<?> getTimeEntryById(@PathVariable("userId") Long userId, @PathVariable("timeId") Long timeId) {
-        return ResponseEntity.ok(new TimeEntryResponseDTO());
+    public ResponseEntity<TimeEntryResponseDTO> getTimeEntryById(@PathVariable("userId") Long userId, @PathVariable("timeId") Long timeId) {
+        var timeEntry = timeService.findTimeEntryById(userId, timeId);
+        var responseDTO = timeMapper.toResponseDTO(timeEntry);
+        responseDTO.setUserId(userId);
+        return ResponseEntity.ok(responseDTO);
     }
 
 }

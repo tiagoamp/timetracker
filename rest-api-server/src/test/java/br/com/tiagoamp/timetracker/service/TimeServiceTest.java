@@ -1,6 +1,7 @@
 package br.com.tiagoamp.timetracker.service;
 
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
+import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.TimeEntryMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.model.Category;
@@ -21,11 +22,12 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class TimeServiceTest {
@@ -41,6 +43,9 @@ class TimeServiceTest {
     private TimeEntryMapper timeMapper = Mappers.getMapper(TimeEntryMapper.class);
     @Spy
     private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+    @Spy
+    private CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
+
 
     @InjectMocks
     private TimeService service;
@@ -147,6 +152,60 @@ class TimeServiceTest {
         Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(user);
         Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(timeEntity));
         service.delete(1L, 10L);
+    }
+
+    @Test
+    @DisplayName("When user does not have time entry should return empty list")
+    void findTimeEntriesOfUser_shouldReturnEmptyList() {
+        var userId = 1L;
+        Mockito.when(categoryService.findCategories(userId)).thenReturn(new ArrayList<>());
+        var entries = service.findTimeEntriesOfUser(userId);
+        assertTrue(entries.isEmpty());
+    }
+
+    @Test
+    @DisplayName("When user has time entry should return list")
+    void findTimeEntriesOfUser_shouldReturnList() {
+        // given
+        var user = new User(1L, "email@email.com", "name", "password");
+        var userEntity = userMapper.toEntity(user);
+        var category = new Category(10L, "cat", "desc");
+        var categoryEntity = categoryMapper.toEntity(category);
+        categoryEntity.setUser(userEntity);
+        var timeEntity = new TimeEntryEntity(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", categoryEntity);
+        Mockito.when(categoryService.findCategories(Mockito.anyLong())).thenReturn(Arrays.asList(category));
+        Mockito.when(timeEntryRepo.retrieveByCategory(Mockito.anyLong())).thenReturn(Arrays.asList(timeEntity));
+        // when
+        var entries = service.findTimeEntriesOfUser(user.getId());
+        // then
+        assertFalse(entries.isEmpty());
+    }
+
+    @Test
+    @DisplayName("When time entry does not exist should throw exception")
+    void findTimeEntryById_shouldThrowError() {
+        var user = new User(1L, "email@email.com", "name", "pass");
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(user);
+        Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        assertThrows(ResourceNotFoundException.class, () -> service.findTimeEntryById(user.getId(), 10L));
+    }
+
+    @Test
+    @DisplayName("When time entry exists should return time entry")
+    void findTimeEntryById_shouldReturnTimeEntry() {
+        // given
+        var user = new User(1L, "email@email.com", "name", "pass");
+        var userEntity = userMapper.toEntity(user);
+        var category = new Category(10L, "cat", "desc");
+        var categoryEntity = categoryMapper.toEntity(category);
+        categoryEntity.setUser(userEntity);
+        var timeEntity = new TimeEntryEntity(100L, LocalDateTime.now(), LocalDateTime.now(), "ann", categoryEntity);
+        Mockito.when(userService.findUserById(Mockito.anyLong())).thenReturn(user);
+        Mockito.when(timeEntryRepo.findById(Mockito.anyLong())).thenReturn(Optional.of(timeEntity));
+        // when
+        var result = service.findTimeEntryById(user.getId(), timeEntity.getId());
+        // then
+        assertEquals(timeEntity.getId().intValue(), result.getId().intValue());
     }
 
 }

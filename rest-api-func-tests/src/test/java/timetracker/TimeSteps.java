@@ -78,6 +78,22 @@ public class TimeSteps extends GlobalSteps {
                 .when().delete("/user/{userId}/time/{timeId}",userId, timeId).then();
     }
 
+    @When("^send a Get request for User Time entries$")
+    public void send_a_Get_request_for_User_Time_entries() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        response = given()
+                .when().get("/user/{userId}/time", userId).then();
+    }
+
+    @When("^send a Get request by id of Time entry$")
+    public void send_a_Get_request_by_id_of_Time_entry() throws Exception {
+        Long userId = objectMapper.readTree(userJson).get("id").asLong();
+        Long timeId = objectMapper.readTree(entryJson).get("id").asLong();
+        response = given()
+                .when().get("/user/{userId}/time/{timeId}",userId, timeId).then();
+    }
+
+
     @Then("^should have category info in time entry$")
     public void should_have_category_info_in_time_entry() throws Exception {
         response.body("categoryId", notNullValue()).body("categoryName", notNullValue());

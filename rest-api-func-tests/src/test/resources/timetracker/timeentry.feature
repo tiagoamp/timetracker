@@ -41,3 +41,31 @@ Feature: TimeEntry Resource
     And retrieve time entry id
     And send a Delete request for Time Entry
     Then should return No Content
+
+  Scenario: Get Time Entries for User
+    Given new valid user info
+    And new valid category info
+    And new valid time entry info
+    When Post a request
+    And retrieve user id
+    And Post a request for new category
+    And retrieve category id
+    And Post a request for new time entry
+    And retrieve time entry id
+    And send a Get request for User Time entries
+    Then should return OK
+    And should have an array of results
+
+  Scenario: Get Time Entry by Id
+    Given new valid user info
+    And new valid category info
+    And new valid time entry info
+    When Post a request
+    And retrieve user id
+    And Post a request for new category
+    And retrieve category id
+    And Post a request for new time entry
+    And retrieve time entry id
+    And send a Get request by id of Time entry
+    Then should return OK
+    And should have id and links info

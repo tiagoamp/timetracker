@@ -5,8 +5,10 @@ import br.com.tiagoamp.timetracker.mapper.TimeEntryMapper;
 import br.com.tiagoamp.timetracker.mapper.TimeEntryMapperImpl;
 import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.TimeEntry;
+import br.com.tiagoamp.timetracker.security.AuthorizationRules;
 import br.com.tiagoamp.timetracker.service.CategoryService;
 import br.com.tiagoamp.timetracker.service.TimeService;
+import br.com.tiagoamp.timetracker.service.TokenService;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +44,10 @@ class TimeEntryControllerTest {
     private UserService userService;
     @MockBean
     private CategoryService categoryService;
+    @MockBean
+    private TokenService tokenService;
+    @MockBean
+    private AuthorizationRules auth;
 
     @Autowired
     private TimeEntryMapperImpl timeMapper;

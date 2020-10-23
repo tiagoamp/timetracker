@@ -7,6 +7,12 @@ public class TokenDTO {
     private String type = "Bearer";
 
 
+    public TokenDTO() { }
+
+    public TokenDTO(String tokenStr) {
+        this.token = tokenStr;
+    }
+
     public String getToken() {
         return token;
     }

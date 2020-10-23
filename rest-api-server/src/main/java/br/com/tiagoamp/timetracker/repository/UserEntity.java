@@ -1,5 +1,7 @@
 package br.com.tiagoamp.timetracker.repository;
 
+import br.com.tiagoamp.timetracker.model.Role;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,9 @@ public class UserEntity {
     private String name;
 
     private String password;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
 
     public UserEntity() { }
@@ -51,5 +56,10 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

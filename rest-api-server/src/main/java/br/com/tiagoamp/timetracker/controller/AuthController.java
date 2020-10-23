@@ -1,39 +1,44 @@
 package br.com.tiagoamp.timetracker.controller;
 
 import br.com.tiagoamp.timetracker.dto.*;
+import br.com.tiagoamp.timetracker.model.User;
+import br.com.tiagoamp.timetracker.security.SecurityConfiguration;
+import br.com.tiagoamp.timetracker.security.UserAuth;
+import br.com.tiagoamp.timetracker.service.TokenService;
+import br.com.tiagoamp.timetracker.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("timetracker")
 public class AuthController {
 
-    @PostMapping
-    public ResponseEntity<?> authorize(@Valid @RequestBody UserRequestDTO userReqDTO) {
-        return ResponseEntity.ok(new TokenDTO());
-    }
+    @Autowired
+    private AuthenticationManager authManager;  // Bean created in SecurityConfiguration
+
+    @Autowired
+    private TokenService tokenService;
+
+    @Autowired
+    private UserService userService;
 
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
+    @PostMapping("auth")
+    public ResponseEntity<TokenDTO> authorize(@Valid @RequestBody UserAuth userAuth) {
+        UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(userAuth.getEmail(), userAuth.getPassword());
+        Authentication authentication = authManager.authenticate(credentials);
+        userAuth = (UserAuth) authentication.getPrincipal();
+        String tokenStr = tokenService.generateToken(userAuth.getEmail(), userAuth.getRole());
+        return ResponseEntity.ok(new TokenDTO(tokenStr));
     }
 
 }

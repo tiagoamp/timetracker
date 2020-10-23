@@ -4,7 +4,6 @@ import br.com.tiagoamp.timetracker.error.ResourceAlreadyRegisteredException;
 import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
-import br.com.tiagoamp.timetracker.model.Category;
 import br.com.tiagoamp.timetracker.model.User;
 import br.com.tiagoamp.timetracker.repository.CategoryEntity;
 import br.com.tiagoamp.timetracker.repository.CategoryRepository;

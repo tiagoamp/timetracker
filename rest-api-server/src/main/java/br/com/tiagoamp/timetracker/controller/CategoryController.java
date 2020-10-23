@@ -3,7 +3,7 @@ package br.com.tiagoamp.timetracker.controller;
 import br.com.tiagoamp.timetracker.dto.CategoryRequestDTO;
 import br.com.tiagoamp.timetracker.dto.CategoryResponseDTO;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
-import br.com.tiagoamp.timetracker.mapper.UserMapper;
+import br.com.tiagoamp.timetracker.security.AuthorizationRules;
 import br.com.tiagoamp.timetracker.service.CategoryService;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +22,18 @@ public class CategoryController {
 
     private CategoryService categoryService;
     private CategoryMapper categoryMapper;
+    private AuthorizationRules auth;
 
     @Autowired
-    public CategoryController(CategoryService categoryService, CategoryMapper categoryMapper) {
+    public CategoryController(CategoryService categoryService, CategoryMapper categoryMapper, UserService userService, AuthorizationRules authorizationRules) {
         this.categoryService = categoryService;
         this.categoryMapper = categoryMapper;
+        this.auth = authorizationRules;
     }
-
 
     @PostMapping()
     public ResponseEntity<CategoryResponseDTO> createCategory(@PathVariable("userId") Long userId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
+        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
         var category = categoryMapper.toModel(categoryReqDTO);
         category = categoryService.createCategory(userId, category);
         var categoryDTO = categoryMapper.toResponseDTO(category);
@@ -41,6 +43,7 @@ public class CategoryController {
 
     @PutMapping("{categoryId}")
     public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
+        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
         var category = categoryMapper.toModel(categoryReqDTO);
         category.setId(categoryId);
         category = categoryService.update(userId, category);
@@ -51,12 +54,14 @@ public class CategoryController {
 
     @DeleteMapping("{categoryId}")
     public ResponseEntity removeCategory(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId) {
+        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
         categoryService.delete(userId, categoryId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping()
     public ResponseEntity<List<CategoryResponseDTO>> getCategoriesByUser(@PathVariable("userId") Long userId) {
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         var categories = categoryService.findCategories(userId);
         var dtos = categories.stream()
                 .map(categoryMapper::toResponseDTO)
@@ -69,6 +74,7 @@ public class CategoryController {
 
     @GetMapping("{categoryId}")
     public ResponseEntity<CategoryResponseDTO> getCategoriesById(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId) {
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         var category = categoryService.findCategoryById(userId, categoryId);
         var dto = categoryMapper.toResponseDTO(category);
         dto.setUserId(userId);

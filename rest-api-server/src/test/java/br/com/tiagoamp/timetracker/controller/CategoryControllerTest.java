@@ -6,8 +6,10 @@ import br.com.tiagoamp.timetracker.error.TimeTrackerOperationException;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapper;
 import br.com.tiagoamp.timetracker.mapper.CategoryMapperImpl;
 import br.com.tiagoamp.timetracker.model.Category;
+import br.com.tiagoamp.timetracker.security.AuthorizationRules;
 import br.com.tiagoamp.timetracker.service.CategoryService;
 import br.com.tiagoamp.timetracker.service.TimeService;
+import br.com.tiagoamp.timetracker.service.TokenService;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,9 +18,11 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -43,6 +47,10 @@ class CategoryControllerTest {
     private UserService userService;
     @MockBean
     private TimeService timeService;
+    @MockBean
+    private TokenService tokenService;
+    @MockBean
+    private AuthorizationRules auth;
 
     @Autowired
     private CategoryMapperImpl categoryMapper;

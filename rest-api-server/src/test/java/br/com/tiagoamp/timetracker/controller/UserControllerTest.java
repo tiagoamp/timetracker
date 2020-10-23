@@ -5,8 +5,10 @@ import br.com.tiagoamp.timetracker.error.ResourceNotFoundException;
 import br.com.tiagoamp.timetracker.mapper.UserMapper;
 import br.com.tiagoamp.timetracker.mapper.UserMapperImpl;
 import br.com.tiagoamp.timetracker.model.User;
+import br.com.tiagoamp.timetracker.security.AuthorizationRules;
 import br.com.tiagoamp.timetracker.service.CategoryService;
 import br.com.tiagoamp.timetracker.service.TimeService;
+import br.com.tiagoamp.timetracker.service.TokenService;
 import br.com.tiagoamp.timetracker.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +44,10 @@ class UserControllerTest {
     private CategoryService categoryService;
     @MockBean
     private TimeService timeService;
+    @MockBean
+    private TokenService tokenService;
+    @MockBean
+    private AuthorizationRules auth;
 
     @Autowired
     private UserMapperImpl userMapper;

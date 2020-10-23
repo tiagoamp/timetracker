@@ -17,6 +17,8 @@ public class User {
 
     private List<TimeEntry> timeEntries;
 
+    private Role role;
+
 
     public User() { }
 
@@ -83,4 +85,11 @@ public class User {
     public void setTimeEntries(List<TimeEntry> timeEntries) {
         this.timeEntries = timeEntries;
     }
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }

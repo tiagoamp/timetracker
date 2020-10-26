@@ -40,7 +40,8 @@ public class UserSteps extends GlobalSteps {
 
     @When("^Post a request$")
     public void postARequest() {
-        response = given().contentType("application/json").body(userJson)
+        response = given().contentType("application/json").headers("Authorization", bearerToken)
+                  .body(userJson)
                   .when().post("/user").then();
     }
 
@@ -60,27 +61,28 @@ public class UserSteps extends GlobalSteps {
     @When("^send a Put request$")
     public void send_a_Put_request() throws Exception {
         Long id = objectMapper.readTree(userJson).get("id").asLong();
-        response = given().contentType("application/json").body(userJson)
-                   .when().put("/user/{id}",id).then();
+        response = given().contentType("application/json").headers("Authorization", bearerToken)
+                .body(userJson)
+                .when().put("/user/{id}",id).then();
     }
 
     @When("^send a Delete request$")
     public void send_a_Delete_request() throws Exception {
         Long id = objectMapper.readTree(userJson).get("id").asLong();
-        response = given()
+        response = given().headers("Authorization", bearerToken)
                    .when().delete("/user/{id}",id).then();
     }
 
     @When("^send a Get request$")
     public void send_a_Get_request() throws Exception {
-        response = given()
+        response = given().headers("Authorization", bearerToken)
                    .when().get("/user").then();
     }
 
     @When("^send a Get by id request$")
     public void send_a_Get_by_id_request() throws Exception {
         Long id = objectMapper.readTree(userJson).get("id").asLong();
-        response = given()
+        response = given().headers("Authorization", bearerToken)
                    .when().get("/user/{id}",id).then();
     }
 

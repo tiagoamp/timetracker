@@ -37,7 +37,8 @@ public class CategorySteps extends GlobalSteps {
     @When("^Post a request for new category$")
     public void post_a_request_for_new_category() throws Exception {
         Long userId = objectMapper.readTree(userJson).get("id").asLong();
-        response = given().contentType("application/json").body(categoryJson)
+        response = given().contentType("application/json").headers("Authorization", bearerToken)
+                .body(categoryJson)
                 .when().post("/user/{userId}/category", userId).then();
     }
 
@@ -58,7 +59,8 @@ public class CategorySteps extends GlobalSteps {
     public void send_a_Put_request_for_Category() throws Exception {
         Long userId = objectMapper.readTree(userJson).get("id").asLong();
         Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
-        response = given().contentType("application/json").body(categoryJson)
+        response = given().contentType("application/json").headers("Authorization", bearerToken)
+                .body(categoryJson)
                 .when().put("/user/{userId}/category/{categoryId}",userId, categoryId)
                 .then();
     }
@@ -67,14 +69,14 @@ public class CategorySteps extends GlobalSteps {
     public void send_a_Delete_request_for_Category() throws Exception {
         Long userId = objectMapper.readTree(userJson).get("id").asLong();
         Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
-        response = given()
+        response = given().headers("Authorization", bearerToken)
                 .when().delete("/user/{userId}/category/{categoryId}",userId, categoryId).then();
     }
 
     @When("^send a Get Categories request$")
     public void send_a_Get_Categories_request() throws Exception {
         Long userId = objectMapper.readTree(userJson).get("id").asLong();
-        response = given()
+        response = given().headers("Authorization", bearerToken)
                 .when().get("/user/{userId}/category",userId).then();
     }
 
@@ -82,7 +84,7 @@ public class CategorySteps extends GlobalSteps {
     public void send_a_Get_Category_by_id_request() throws Exception {
         Long userId = objectMapper.readTree(userJson).get("id").asLong();
         Long categoryId = objectMapper.readTree(categoryJson).get("id").asLong();
-        response = given()
+        response = given().headers("Authorization", bearerToken)
                 .when().get("/user/{userId}/category/{categoryId}",userId,categoryId).then();
     }
 

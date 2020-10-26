@@ -40,6 +40,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<Object> handleAuthorization(AuthorizationException ex) {
+        ErroDetails error = new ErroDetails("AuthorizationException", "Operation not allowed for authenticated user");
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
+
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> fieldErrors = new HashMap<>();
@@ -56,12 +62,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErroDetails error = new ErroDetails("JsonParseException", "Could not parse Json");
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(AuthorizationException.class)
-    public ResponseEntity<Object> handleAuthentication(AuthorizationException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ErroDetails error = new ErroDetails("AuthorizationException", "Operation not allowed for authenticated user");
-        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
     @Override   // catch any other exception for standard error message handling

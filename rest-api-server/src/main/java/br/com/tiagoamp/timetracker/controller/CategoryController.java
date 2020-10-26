@@ -33,7 +33,7 @@ public class CategoryController {
 
     @PostMapping()
     public ResponseEntity<CategoryResponseDTO> createCategory(@PathVariable("userId") Long userId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
-        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         var category = categoryMapper.toModel(categoryReqDTO);
         category = categoryService.createCategory(userId, category);
         var categoryDTO = categoryMapper.toResponseDTO(category);
@@ -43,7 +43,7 @@ public class CategoryController {
 
     @PutMapping("{categoryId}")
     public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId, @Valid @RequestBody CategoryRequestDTO categoryReqDTO) {
-        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         var category = categoryMapper.toModel(categoryReqDTO);
         category.setId(categoryId);
         category = categoryService.update(userId, category);
@@ -54,7 +54,7 @@ public class CategoryController {
 
     @DeleteMapping("{categoryId}")
     public ResponseEntity removeCategory(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId) {
-        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         categoryService.delete(userId, categoryId);
         return ResponseEntity.noContent().build();
     }

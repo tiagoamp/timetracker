@@ -43,7 +43,7 @@ public class UserController {
 
     @PutMapping("{id}")
     public ResponseEntity<UserResponseDTO> updateUser(@NotNull @PathVariable("id") Long id, @Valid @RequestBody UserRequestDTO userReqDTO) {
-        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(id);
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(id);
         var user = userMapper.toModel(userReqDTO);
         user.setId(id);
         user = userService.update(user);

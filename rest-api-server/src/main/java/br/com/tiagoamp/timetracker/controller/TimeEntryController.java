@@ -33,7 +33,7 @@ public class TimeEntryController {
 
     @PostMapping
     public ResponseEntity<?> createTimeEntry(@PathVariable("userId") Long userId, @Valid @RequestBody TimeEntryRequestDTO timeEntryReqDTO) {
-        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         var timeEntry = timeMapper.toModel(timeEntryReqDTO);
         timeEntry = timeService.create(userId, timeEntry);
         var timeDTO = timeMapper.toResponseDTO(timeEntry);
@@ -43,7 +43,7 @@ public class TimeEntryController {
 
     @PutMapping("{timeId}")
     public ResponseEntity<?> updateTimeEntry(@PathVariable("userId") Long userId, @PathVariable("timeId") Long timeId, @RequestBody TimeEntryRequestDTO timeEntryReqDTO) {
-        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         var timeEntry = timeMapper.toModel(timeEntryReqDTO);
         timeEntry.setId(timeId);
         timeEntry = timeService.update(userId, timeEntry);
@@ -54,7 +54,7 @@ public class TimeEntryController {
 
     @DeleteMapping("{timeId}")
     public ResponseEntity removeTimeEntry(@PathVariable("userId") Long userId, @PathVariable("timeId") Long timeId) {
-        auth.authorizeOnlyIfRequesterUserIsTheAuthenticatedUser(userId);
+        auth.authorizeIfRequesterUserIsAdminOrTheAuthenticatedUser(userId);
         timeService.delete(userId, timeId);
         return ResponseEntity.noContent().build();
     }

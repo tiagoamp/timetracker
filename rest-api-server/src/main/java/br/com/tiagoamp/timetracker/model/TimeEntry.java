@@ -5,13 +5,9 @@ import java.time.LocalDateTime;
 public class TimeEntry {
 
     private Long id;
-
     private LocalDateTime startTime;
-
     private LocalDateTime endTime;
-
     private String annotations;
-
     private Category category;
 
 

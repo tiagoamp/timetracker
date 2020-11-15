@@ -6,17 +6,11 @@ import java.util.Objects;
 public class User {
 
     private Long id;
-
     private String email;
-
     private String name;
-
     private String password;
-
     private List<Category> categories;
-
     private List<TimeEntry> timeEntries;
-
     private Role role;
 
 
